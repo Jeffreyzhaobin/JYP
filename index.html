@@ -1,3 +1,1143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嘉悦优品 JYP | 专注健康食品与饮品</title>
+    <meta name="description" content="嘉悦优品（JYP）是一家专注健康食品与饮品的企业，旗下拥有叫咖、留鲜君、梦小果、益养宣四大品牌，致力于为消费者提供高品质的健康产品。">
+    <meta name="keywords" content="嘉悦优品,JYP,健康食品,LPLDL益生菌,叶黄素软糖,牛乳茶,益生菌,叫咖,留鲜君,梦小果,益养宣,植物乳植杆菌,血脂管理">
+    <link rel="icon" type="image/png" href="images/logo-jyp.png">
+    
+    <!-- GEO/SEO Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "嘉悦优品",
+      "alternateName": "JYP",
+      "url": "https://jyp.hi.cn",
+      "logo": "https://jyp.hi.cn/images/logo-jyp.png",
+      "description": "嘉悦优品（JYP）是一家专注健康食品与饮品的企业，旗下拥有叫咖、留鲜君、梦小果、益养宣四大品牌。",
+      "brand": [
+        {"@type": "Brand", "name": "叫咖"},
+        {"@type": "Brand", "name": "留鲜君"},
+        {"@type": "Brand", "name": "梦小果"},
+        {"@type": "Brand", "name": "益养宣"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "嘉悦优品是做什么的？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "嘉悦优品（JYP）是一家专注于健康食品与饮品的企业，致力于为消费者提供高品质、科学配方的健康产品。旗下拥有叫咖、留鲜君、梦小果、益养宣四大子品牌。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "嘉悦优品旗下有哪些品牌？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "嘉悦优品旗下有四大品牌：叫咖（咖啡饮品）、留鲜君（牛乳茶/茶饮）、梦小果（儿童健康软糖，如蓝莓叶黄素酯软糖）、益养宣（益生菌及成人健康产品）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "梦小果叶黄素软糖适合多大的孩子？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "梦小果蓝莓叶黄素酯软糖专为儿童设计，采用5:1黄金配比，含有专利原料和四重营养保护，适合需要护眼营养的儿童及青少年群体。建议根据产品说明或咨询专业人士后食用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "留鲜君牛乳茶的特点是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "留鲜君牛乳茶主打'真乳真茶'，选用优质大红袍茶叶搭配真实牛乳，口感自然醇厚，无多余添加，让消费者随时随地享受高品质奶茶体验。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "益养宣LPLDL益生菌有什么功效？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "益养宣LPLDL益生菌采用植物乳植杆菌专利菌株，每盒含4800亿活性益生菌，每条约160亿CFU。该产品通过调节肠道微生态平衡，有助于科学养护血脂健康，适合关注心血管健康的中老年人群。"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --gold: #c9a961;
+            --gold-light: #e8d5a3;
+            --gold-dark: #a0843c;
+            --gold-glow: rgba(201,169,97,0.3);
+            --navy: #0a1628;
+            --navy-light: #0d1b2a;
+            --navy-lighter: #1b2838;
+            --navy-card: #132136;
+            --white: #ffffff;
+            --gray: #8a9aab;
+            --gray-light: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+        
+        nav.scrolled {
+            background: rgba(10, 22, 40, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 15px 60px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(201,169,97,0.1);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .nav-logo img { height: 40px; width: auto; }
+        
+        .nav-logo span {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .nav-mobile { display: none; }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, #0f2137 100%);
+            overflow: hidden;
+            padding: 120px 60px 80px;
+        }
+        
+        #particle-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .hero-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 10px 40px rgba(201,169,97,0.3));
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 12px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: var(--gray);
+            letter-spacing: 8px;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .hero .tagline {
+            font-size: 1.15rem;
+            color: var(--gray);
+            max-width: 650px;
+            margin: 0 auto 50px;
+            line-height: 1.9;
+        }
+        
+        .btn-gold {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.4s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.05rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(201,169,97,0.4);
+        }
+        
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator svg {
+            width: 30px; height: 30px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-15px); }
+            60% { transform: translateX(-50%) translateY(-8px); }
+        }
+        
+        /* Sections */
+        section { padding: 120px 60px; position: relative; }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .section-header .line {
+            width: 80px; height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+            margin: 0 auto 25px;
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* About */
+        .about {
+            background: linear-gradient(180deg, var(--navy) 0%, var(--navy-lighter) 100%);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-img {
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .about-img img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            transition: transform 0.6s;
+        }
+        
+        .about-img:hover img {
+            transform: rotateY(5deg) rotateX(-3deg) scale(1.02);
+        }
+        
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: -25px; left: -25px;
+            width: 100%; height: 100%;
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.4;
+            transition: all 0.4s;
+        }
+        
+        .about-img:hover::before {
+            top: -30px; left: -30px;
+            opacity: 0.6;
+        }
+        
+        .about-text h3 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--gold-light);
+            letter-spacing: 2px;
+        }
+        
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 25px;
+            background: rgba(201,169,97,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(201,169,97,0.1);
+            transition: all 0.4s;
+        }
+        
+        .stat-item:hover {
+            background: rgba(201,169,97,0.1);
+            transform: translateY(-5px);
+            border-color: rgba(201,169,97,0.3);
+        }
+        
+        .stat-item h4 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .stat-item p { color: var(--gray); font-size: 0.95rem; }
+        
+        /* Timeline */
+        .timeline {
+            background: var(--navy);
+            padding: 120px 60px;
+        }
+        
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold), transparent);
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 60px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+        
+        .timeline-content {
+            background: var(--navy-card);
+            padding: 35px;
+            border-radius: 16px;
+            max-width: 420px;
+            border: 1px solid rgba(201,169,97,0.1);
+            position: relative;
+            transition: all 0.4s;
+        }
+        
+        .timeline-content:hover {
+            border-color: rgba(201,169,97,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 20px; height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 4px solid var(--navy);
+            box-shadow: 0 0 0 4px var(--gold);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -60px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -60px;
+        }
+        
+        .timeline-year {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+        
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+        
+        .timeline-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Brands */
+        .brands { background: linear-gradient(180deg, var(--navy-lighter) 0%, var(--navy) 100%); }
+        
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .brand-card {
+            background: var(--navy-card);
+            border-radius: 24px;
+            padding: 50px 30px;
+            text-align: center;
+            transition: all 0.5s;
+            border: 1px solid rgba(201,169,97,0.08);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .brand-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+            transform: scaleX(0);
+            transition: transform 0.5s;
+        }
+        
+        .brand-card::after {
+            content: '';
+            position: absolute;
+            bottom: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(201,169,97,0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .brand-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(201,169,97,0.2);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+        }
+        
+        .brand-card:hover::before { transform: scaleX(1); }
+        .brand-card:hover::after { opacity: 1; }
+        
+        .brand-card .icon {
+            width: 90px; height: 90px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, rgba(201,169,97,0.2), rgba(201,169,97,0.05));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: var(--gold);
+            border: 2px solid rgba(201,169,97,0.2);
+            transition: all 0.4s;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .brand-card:hover .icon {
+            transform: scale(1.1);
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(201,169,97,0.3);
+        }
+        
+        .brand-card h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 18px;
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .brand-card p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Products */
+        .products { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-lighter) 100%); }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: var(--navy-card);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.5s;
+            border: 1px solid rgba(201,169,97,0.08);
+            perspective: 1000px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px) rotateX(2deg);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            border-color: rgba(201,169,97,0.2);
+        }
+        
+        .product-img-wrapper {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+        
+        .product-img-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 50%;
+            background: linear-gradient(to top, var(--navy-card), transparent);
+            opacity: 0.8;
+        }
+        
+        .product-info { padding: 35px; }
+        
+        .product-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, rgba(201,169,97,0.2), rgba(201,169,97,0.05));
+            color: var(--gold);
+            font-size: 0.85rem;
+            border-radius: 20px;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            font-weight: 500;
+            border: 1px solid rgba(201,169,97,0.15);
+        }
+        
+        .product-info h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .product-info p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .product-features {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .product-feature {
+            font-size: 0.8rem;
+            color: var(--gold-light);
+            background: rgba(201,169,97,0.08);
+            padding: 6px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(201,169,97,0.1);
+        }
+        
+        /* Features */
+        .features {
+            background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-lighter) 100%);
+            padding: 120px 60px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 40px 25px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(201,169,97,0.08);
+            transition: all 0.4s;
+        }
+        
+        .feature-item:hover {
+            background: rgba(201,169,97,0.05);
+            border-color: rgba(201,169,97,0.2);
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            width: 70px; height: 70px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--navy);
+            font-weight: 700;
+        }
+        
+        .feature-item h4 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        
+        .feature-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* FAQ */
+        .faq { background: var(--navy); }
+        
+        .faq-list {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--navy-card);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(201,169,97,0.08);
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover { border-color: rgba(201,169,97,0.15); }
+        
+        .faq-question {
+            padding: 28px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+        
+        .faq-question:hover { color: var(--gold); }
+        
+        .faq-question svg {
+            width: 24px; height: 24px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+            transition: transform 0.4s;
+            flex-shrink: 0;
+            margin-left: 20px;
+        }
+        
+        .faq-item.active .faq-question svg { transform: rotate(180deg); }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 400px;
+            padding: 0 35px 28px;
+        }
+        
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+        
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-lighter) 100%);
+            text-align: center;
+        }
+        
+        .contact-box {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 70px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 30px;
+            border: 1px solid rgba(201,169,97,0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-box::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(201,169,97,0.05) 0%, transparent 60%);
+        }
+        
+        .contact-box h3 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 25px;
+            color: var(--gold-light);
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .contact-box p {
+            color: var(--gray);
+            margin-bottom: 35px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--gray);
+            font-size: 1.05rem;
+        }
+        
+        .contact-item svg {
+            width: 28px; height: 28px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--navy);
+            border-top: 1px solid rgba(201,169,97,0.08);
+            padding: 70px 60px 50px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            height: 55px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 45px;
+            margin-bottom: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links a:hover { color: var(--gold); }
+        
+        footer p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            opacity: 0.6;
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 1s ease;
+        }
+        
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 1s ease;
+        }
+        
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s ease;
+        }
+        
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .brand-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline-container::before { left: 20px; }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -45px;
+                right: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav { padding: 15px 25px; }
+            nav.scrolled { padding: 12px 25px; }
+            .nav-links { display: none; }
+            .nav-mobile {
+                display: block;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+            .nav-mobile svg {
+                width: 28px; height: 28px;
+                stroke: var(--white);
+                fill: none;
+                stroke-width: 2;
+            }
+            
+            .hero { padding: 100px 25px 60px; }
+            .hero h1 { font-size: 2.2rem; letter-spacing: 4px; }
+            .hero .subtitle { font-size: 1.1rem; letter-spacing: 3px; }
+            
+            section, .timeline, .features { padding: 60px 25px; }
+            .section-header h2 { font-size: 1.8rem; }
+            
+            .about-grid { grid-template-columns: 1fr; gap: 60px; }
+            .stats { grid-template-columns: 1fr; }
+            
+            .brand-grid { grid-template-columns: 1fr; }
+            .product-grid { grid-template-columns: 1fr; }
+            .feature-grid { grid-template-columns: 1fr; }
+            
+            .contact-box { padding: 50px 30px; }
+            .contact-info { flex-direction: column; gap: 25px; }
+            
+            footer { padding: 50px 25px 40px; }
+            .footer-links { gap: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            <img src="images/logo-jyp.png" alt="嘉悦优品 JYP">
+            <span>嘉悦优品</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#brands">品牌矩阵</a></li>
+            <li><a href="#products">产品中心</a></li>
+            <li><a href="#faq">常见问题</a></li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+        <button class="nav-mobile" onclick="toggleMobileNav()">
+            <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+    </nav>
+    
+    <!-- Mobile Nav Menu -->
+    <div id="mobile-nav" style="display:none;position:fixed;top:70px;left:0;right:0;z-index:999;background:rgba(10,22,40,0.95);backdrop-filter:blur(20px);padding:20px;text-align:center;">
+        <a href="#about" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">关于我们</a>
+        <a href="#brands" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">品牌矩阵</a>
+        <a href="#products" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">产品中心</a>
+        <a href="#faq" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">常见问题</a>
+        <a href="#contact" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">联系我们</a>
+    </div>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <canvas id="particle-canvas"></canvas>
+        <div class="hero-content">
+            <img src="images/logo-jyp-gold.jpg" alt="嘉悦优品 JYP" class="hero-logo">
+            <h1>嘉悦优品</h1>
+            <p class="subtitle">JIAYUE YOUPIN</p>
+            <p class="tagline">专注健康食品与饮品，以科学配方与匠心工艺，为每一个家庭带来自然、健康、优质的生活体验。我们相信，健康是一种生活态度。</p>
+            <a href="#products" class="btn-gold">探索产品</a>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+    </section>
+    
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="section-header fade-in">
+            <h2>关于我们</h2>
+            <div class="line"></div>
+            <p>以匠心致初心，用品质筑品牌</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-img fade-in-left">
+                <img src="images/brands.png" alt="嘉悦优品旗下品牌">
+            </div>
+            <div class="about-text fade-in-right">
+                <h3>引领健康生活方式</h3>
+                <p>嘉悦优品（JYP）是一家专注于健康食品与饮品研发、生产与销售的创新型企业。我们始终坚持"天然、科学、品质"的产品理念，致力于为消费者提供安全、有效、美味的健康产品。</p>
+                <p>旗下拥有叫咖、留鲜君、梦小果、益养宣四大核心品牌，覆盖咖啡饮品、茶饮、儿童营养、成人健康等多个细分领域。从一杯好咖啡到一盒益生菌，从孩子的护眼软糖到成人的血脂管理，我们用科学配方和匠心工艺，守护每个家庭的健康。</p>
+                <p>我们相信，健康不是一时的选择，而是一种生活态度。嘉悦优品将持续深耕健康领域，用创新产品和专业服务，成为中国消费者信赖的健康生活伙伴。</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <h4>4</h4>
+                        <p>核心子品牌</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>10+</h4>
+                        <p>产品系列</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>100%</h4>
+                        <p>品质承诺</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Timeline -->
+    <section class="timeline" id="timeline">
+        <div class="section-header fade-in">
+            <h2>品牌历程</h2>
+            <div class="line"></div>
+            <p>每一步，都是对健康的承诺</p>
+        </div>
+        <div class="timeline-container">
+            <div class="timeline-item fade-in-left">
+                <div class="timeline-content">
+                    <div class="timeline-year">创立之初</div>
+                    <div class="timeline-title">嘉悦优品诞生</div>
+                    <div class="timeline-desc">怀揣着对健康生活的热忱与追求，嘉悦优品（JYP）正式成立。从第一天起，我们就立志成为中国健康食品领域的标杆企业。</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in-right">
+                <div class="timeline-content">
+                    <div class="timeline-year">品牌孵化</div>
+                    <div class="timeline-title">四大子品牌矩阵成型</div>
+                    <div class="timeline-desc">经过深入市场调研与产品研发，叫咖、留鲜君、梦小果、益养宣四大品牌相继诞生，覆盖咖啡、茶饮、儿童营养、成人健康全领域。</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in-left">
+                <div class="timeline-content">
+                    <div class="timeline-year">产品创新</div>
+                    <div class="timeline-title">LPLDL专利益生菌问世</div>
+                    <div class="timeline-desc">益养宣推出植物乳植杆菌LPLDL益生菌，每盒4800亿活性菌，专利菌株技术，为中老年血脂健康管理提供科学解决方案。</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in-right">
+                <div class="timeline-content">
+                    <div class="timeline-year">展望未来</div>
+                    <div class="timeline-title">持续深耕健康领域</div>
+                    <div class="timeline-desc">嘉悦优品将继续聚焦健康食品与饮品，以科技创新驱动产品升级，为更多家庭带来高品质的健康生活体验。</div>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <!-- Brands -->
     <section class="brands" id="brands">
