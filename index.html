@@ -493,13 +493,13 @@
             position: absolute;
             z-index: 0;
             pointer-events: none;
-            width: 120px; height: 120px;
+            width: 200px; height: 200px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,220,140,0.4) 0%, rgba(255,180,80,0.2) 30%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,230,160,0.5) 0%, rgba(255,190,90,0.3) 25%, rgba(255,160,50,0.1) 50%, transparent 70%);
             box-shadow: 
-                0 0 60px rgba(255, 180, 80, 0.3),
-                0 0 120px rgba(255, 140, 50, 0.15),
-                0 0 180px rgba(255, 120, 30, 0.08);
+                0 0 80px rgba(255, 180, 80, 0.4),
+                0 0 160px rgba(255, 140, 50, 0.2),
+                0 0 250px rgba(255, 120, 30, 0.1);
             opacity: 0;
             transition: opacity 30s ease, left 120s linear, top 120s linear;
         }
@@ -508,9 +508,9 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 50px; height: 50px;
+            width: 80px; height: 80px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,240,200,0.9) 0%, rgba(255,200,120,0.6) 40%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,245,210,0.95) 0%, rgba(255,215,140,0.7) 40%, transparent 75%);
         }
         
         /* Moon */
@@ -518,12 +518,12 @@
             position: absolute;
             z-index: 0;
             pointer-events: none;
-            width: 80px; height: 80px;
+            width: 120px; height: 120px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(220,230,255,0.6) 0%, rgba(180,200,240,0.3) 40%, transparent 70%);
+            background: radial-gradient(circle at 30% 30%, rgba(230,240,255,0.7) 0%, rgba(190,210,250,0.4) 35%, transparent 70%);
             box-shadow: 
-                0 0 40px rgba(180, 200, 255, 0.2),
-                0 0 80px rgba(140, 160, 220, 0.1);
+                0 0 60px rgba(180, 200, 255, 0.3),
+                0 0 120px rgba(140, 160, 220, 0.15);
             opacity: 0;
             transition: opacity 30s ease, left 120s linear, top 120s linear;
         }
@@ -532,10 +532,10 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 35px; height: 35px;
+            width: 55px; height: 55px;
             border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, rgba(240,245,255,0.9) 0%, rgba(200,215,245,0.5) 50%, transparent 75%);
-            box-shadow: inset -4px -3px 8px rgba(100,120,180,0.4);
+            background: radial-gradient(circle at 35% 35%, rgba(245,250,255,0.95) 0%, rgba(210,225,250,0.6) 50%, transparent 75%);
+            box-shadow: inset -5px -4px 12px rgba(100,120,180,0.35);
         }
         
         @keyframes heroBgShift {
@@ -1616,7 +1616,7 @@
         <div class="product-grid">
             <div class="product-card fade-in">
                 <div class="product-img-wrapper">
-                    <img src="images/product-mengxiaoguo-v2.jpg" alt="梦小果蓝莓叶黄素酯软糖" class="product-img">
+                    <img src="images/product-mengxiaoguo-v3.jpg" alt="梦小果蓝莓叶黄素酯软糖" class="product-img">
                     <div class="product-img-overlay"></div>
                 </div>
                 <div class="product-info">
@@ -1633,7 +1633,7 @@
             </div>
             <div class="product-card fade-in">
                 <div class="product-img-wrapper">
-                    <img src="images/product-niurucha-combo.jpg?v=2" alt="留鲜君牛乳茶系列 - 茉莉奶绿 & 大红袍" class="product-img">
+                    <img src="images/product-niurucha-v5.jpg" alt="留鲜君牛乳茶系列 - 茉莉奶绿 & 大红袍" class="product-img">
                     <div class="product-img-overlay"></div>
                 </div>
                 <div class="product-info">
@@ -1650,7 +1650,7 @@
             </div>
             <div class="product-card fade-in">
                 <div class="product-img-wrapper">
-                    <img src="images/product-yiyangxuan-v4.jpg" alt="益养宣LPLDL益生菌" class="product-img">
+                    <img src="images/product-yiyangxuan-v5.jpg" alt="益养宣LPLDL益生菌" class="product-img">
                     <div class="product-img-overlay"></div>
                 </div>
                 <div class="product-info">
@@ -2185,7 +2185,7 @@
                 starCanvas.width = window.innerWidth;
                 starCanvas.height = window.innerHeight;
                 stars = [];
-                const count = Math.min(200, Math.floor(window.innerWidth / 6));
+                const count = Math.min(350, Math.floor(window.innerWidth / 4));
                 for (let i = 0; i < count; i++) {
                     stars.push({
                         x: Math.random() * starCanvas.width,
@@ -2233,18 +2233,18 @@
         // === 24-Hour Natural Day/Night Cycle with Sun, Moon, Stars ===
         // Keyframes for continuous interpolation (hour: [bgColor, glowColor, particleTint, starOpacity, sunOpacity, moonOpacity, gridOpacity])
         const TIME_KEYFRAMES = [
-            { h: 0,    bg: [8, 6, 20],     glow: [40, 30, 90],    tint: [60, 50, 140],  star: 0.9, sun: 0,   moon: 0.7, grid: 0.03, accent: [80, 70, 160] },
-            { h: 4,    bg: [6, 8, 24],     glow: [30, 50, 120],   tint: [50, 70, 160],  star: 0.7, sun: 0,   moon: 0.9, grid: 0.035, accent: [70, 90, 170] },
-            { h: 5.5,  bg: [20, 12, 30],   glow: [200, 120, 100], tint: [180, 120, 140], star: 0.3, sun: 0.1, moon: 0.6, grid: 0.05, accent: [200, 130, 100] },
-            { h: 6.5,  bg: [30, 18, 25],   glow: [255, 180, 100], tint: [255, 180, 120], star: 0.1, sun: 0.5, moon: 0.2, grid: 0.06, accent: [255, 170, 80] },
-            { h: 8,    bg: [10, 18, 40],   glow: [100, 160, 255], tint: [100, 160, 255], star: 0,   sun: 0.8, moon: 0,   grid: 0.06, accent: [100, 160, 255] },
-            { h: 12,   bg: [8, 16, 42],    glow: [120, 180, 255], tint: [120, 170, 255], star: 0,   sun: 1,   moon: 0,   grid: 0.065, accent: [120, 180, 255] },
-            { h: 16,   bg: [10, 18, 40],   glow: [100, 150, 230], tint: [100, 150, 230], star: 0,   sun: 0.8, moon: 0,   grid: 0.06, accent: [100, 150, 230] },
-            { h: 17.5, bg: [25, 15, 35],   glow: [255, 160, 80],  tint: [220, 140, 160], star: 0.1, sun: 0.4, moon: 0.1, grid: 0.055, accent: [255, 150, 70] },
-            { h: 18.5, bg: [15, 10, 30],   glow: [180, 100, 200], tint: [180, 120, 220], star: 0.4, sun: 0.1, moon: 0.4, grid: 0.05, accent: [180, 110, 220] },
-            { h: 20,   bg: [8, 10, 30],    glow: [60, 80, 180],   tint: [80, 100, 200],  star: 0.7, sun: 0,   moon: 0.7, grid: 0.045, accent: [80, 100, 200] },
-            { h: 22,   bg: [6, 6, 22],     glow: [40, 40, 100],   tint: [60, 60, 150],   star: 0.85, sun: 0,  moon: 0.8, grid: 0.035, accent: [70, 70, 150] },
-            { h: 24,   bg: [8, 6, 20],     glow: [40, 30, 90],    tint: [60, 50, 140],  star: 0.9, sun: 0,   moon: 0.7, grid: 0.03, accent: [80, 70, 160] },
+            { h: 0,    bg: [3, 2, 12],      glow: [30, 20, 70],    tint: [50, 40, 120],   star: 1.0, sun: 0,   moon: 0.8, grid: 0.025, accent: [70, 60, 150] },
+            { h: 4,    bg: [4, 4, 18],      glow: [25, 35, 90],    tint: [40, 55, 140],   star: 0.8, sun: 0,   moon: 0.95, grid: 0.03, accent: [60, 80, 160] },
+            { h: 5.5,  bg: [30, 18, 35],    glow: [255, 140, 80],  tint: [200, 130, 150], star: 0.25, sun: 0.15, moon: 0.5, grid: 0.05, accent: [255, 140, 70] },
+            { h: 6.5,  bg: [50, 30, 35],    glow: [255, 180, 80],  tint: [255, 170, 110], star: 0.05, sun: 0.55, moon: 0.15, grid: 0.06, accent: [255, 160, 60] },
+            { h: 8,    bg: [20, 40, 80],    glow: [120, 180, 255], tint: [100, 170, 255], star: 0,    sun: 0.85, moon: 0, grid: 0.065, accent: [100, 170, 255] },
+            { h: 12,   bg: [25, 55, 115],   glow: [150, 200, 255], tint: [130, 190, 255], star: 0,    sun: 1.0,  moon: 0, grid: 0.075, accent: [130, 190, 255] },
+            { h: 16,   bg: [20, 45, 95],    glow: [120, 170, 240], tint: [100, 160, 240], star: 0,    sun: 0.85, moon: 0, grid: 0.065, accent: [100, 160, 240] },
+            { h: 17.5, bg: [45, 25, 45],    glow: [255, 150, 60],  tint: [230, 130, 150], star: 0.1,  sun: 0.45, moon: 0.1, grid: 0.055, accent: [255, 140, 50] },
+            { h: 18.5, bg: [22, 12, 40],    glow: [200, 90, 220],  tint: [190, 110, 230], star: 0.45, sun: 0.12, moon: 0.45, grid: 0.05, accent: [200, 100, 230] },
+            { h: 20,   bg: [10, 10, 35],    glow: [50, 70, 170],   tint: [70, 90, 190],   star: 0.75, sun: 0,    moon: 0.75, grid: 0.04, accent: [70, 90, 190] },
+            { h: 22,   bg: [5, 4, 20],      glow: [30, 30, 90],    tint: [50, 50, 140],   star: 0.9,  sun: 0,    moon: 0.85, grid: 0.03, accent: [60, 60, 150] },
+            { h: 24,   bg: [3, 2, 12],      glow: [30, 20, 70],    tint: [50, 40, 120],   star: 1.0,  sun: 0,    moon: 0.8, grid: 0.025, accent: [70, 60, 150] },
         ];
         
         function lerp(a, b, t) { return a + (b - a) * t; }
