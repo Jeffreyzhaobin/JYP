@@ -477,6 +477,67 @@
             50% { box-shadow: 0 0 35px var(--gold), 0 0 70px var(--gold-glow); }
         }
         
+        /* Star layer */
+        .star-layer {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 60s ease;
+        }
+        
+        /* Sun */
+        .celestial-sun {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,220,140,0.4) 0%, rgba(255,180,80,0.2) 30%, transparent 70%);
+            box-shadow: 
+                0 0 60px rgba(255, 180, 80, 0.3),
+                0 0 120px rgba(255, 140, 50, 0.15),
+                0 0 180px rgba(255, 120, 30, 0.08);
+            opacity: 0;
+            transition: opacity 30s ease, left 120s linear, top 120s linear;
+        }
+        .celestial-sun::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,240,200,0.9) 0%, rgba(255,200,120,0.6) 40%, transparent 70%);
+        }
+        
+        /* Moon */
+        .celestial-moon {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(220,230,255,0.6) 0%, rgba(180,200,240,0.3) 40%, transparent 70%);
+            box-shadow: 
+                0 0 40px rgba(180, 200, 255, 0.2),
+                0 0 80px rgba(140, 160, 220, 0.1);
+            opacity: 0;
+            transition: opacity 30s ease, left 120s linear, top 120s linear;
+        }
+        .celestial-moon::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35px; height: 35px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(240,245,255,0.9) 0%, rgba(200,215,245,0.5) 50%, transparent 75%);
+            box-shadow: inset -4px -3px 8px rgba(100,120,180,0.4);
+        }
+        
         @keyframes heroBgShift {
             0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
             25% { transform: translate(-3%, 2%) rotate(2deg) scale(1.02); }
@@ -1421,6 +1482,12 @@
         <canvas id="particle-canvas"></canvas>
         <div class="hero-grid"></div>
         <div class="hero-scanlines"></div>
+        <!-- Star layer (canvas for twinkling stars) -->
+        <canvas id="star-layer" class="star-layer"></canvas>
+        <!-- Sun -->
+        <div id="celestial-sun" class="celestial-sun"></div>
+        <!-- Moon -->
+        <div id="celestial-moon" class="celestial-moon"></div>
         <div class="hero-orbital"></div>
         <div class="hero-orbital hero-orbital2"></div>
         <div class="hero-content">
@@ -1566,7 +1633,7 @@
             </div>
             <div class="product-card fade-in">
                 <div class="product-img-wrapper">
-                    <img src="images/product-niurucha-combo.jpg" alt="留鲜君牛乳茶系列 - 茉莉奶绿 & 大红袍" class="product-img">
+                    <img src="images/product-niurucha-combo.jpg?v=2" alt="留鲜君牛乳茶系列 - 茉莉奶绿 & 大红袍" class="product-img">
                     <div class="product-img-overlay"></div>
                 </div>
                 <div class="product-info">
@@ -1583,7 +1650,7 @@
             </div>
             <div class="product-card fade-in">
                 <div class="product-img-wrapper">
-                    <img src="images/product-yiyangxuan-v3.jpg" alt="益养宣LPLDL益生菌" class="product-img">
+                    <img src="images/product-yiyangxuan-v4.jpg" alt="益养宣LPLDL益生菌" class="product-img">
                     <div class="product-img-overlay"></div>
                 </div>
                 <div class="product-info">
@@ -2106,179 +2173,200 @@
         }
         animateParticles();
         
-        // Time-based background color - ENHANCED
-        function getTimeTheme() {
-            const hour = new Date().getHours();
-            let bg, glow1, glow2, glow3, glow4, glow5, glowTop, particleTint, gridOpacity, scanlineOpacity, orbitalColor, accentColor, periodName, periodIcon;
+        // Starfield canvas - twinkling stars for night time
+        (function initStarLayer() {
+            const starCanvas = document.getElementById('star-layer');
+            if (!starCanvas) return;
+            const sctx = starCanvas.getContext('2d');
+            let stars = [];
+            let starTime = 0;
             
-            if (hour >= 6 && hour < 10) {
-                // Morning - warm dawn orange-gold
-                periodName = '晨光'; periodIcon = '🌅';
-                bg = '#100a06';
-                glow1 = 'rgba(255, 160, 60, 0.25)';
-                glow2 = 'rgba(255, 130, 30, 0.15)';
-                glow3 = 'rgba(255, 180, 100, 0.12)';
-                glow4 = 'rgba(255, 140, 50, 0.08)';
-                glow5 = 'rgba(255, 200, 120, 0.06)';
-                glowTop = 'rgba(255, 160, 60, 0.15)';
-                particleTint = { r: 255, g: 180, b: 100 };
-                gridOpacity = 0.08;
-                scanlineOpacity = 0.04;
-                orbitalColor = 'rgba(255, 160, 60, 0.12)';
-                accentColor = '#ff9a56';
-            } else if (hour >= 10 && hour < 16) {
-                // Day - bright blue-cyan
-                periodName = '日间'; periodIcon = '☀️';
-                bg = '#040d20';
-                glow1 = 'rgba(80, 150, 255, 0.25)';
-                glow2 = 'rgba(60, 130, 240, 0.15)';
-                glow3 = 'rgba(100, 160, 255, 0.12)';
-                glow4 = 'rgba(80, 140, 220, 0.08)';
-                glow5 = 'rgba(120, 180, 255, 0.06)';
-                glowTop = 'rgba(100, 170, 255, 0.15)';
-                particleTint = { r: 100, g: 160, b: 255 };
-                gridOpacity = 0.07;
-                scanlineOpacity = 0.04;
-                orbitalColor = 'rgba(100, 160, 255, 0.12)';
-                accentColor = '#64a0ff';
-            } else if (hour >= 16 && hour < 19) {
-                // Sunset - purple-gold dramatic
-                periodName = '黄昏'; periodIcon = '🌆';
-                bg = '#0e0618';
-                glow1 = 'rgba(180, 100, 255, 0.3)';
-                glow2 = 'rgba(255, 140, 50, 0.18)';
-                glow3 = 'rgba(200, 120, 255, 0.15)';
-                glow4 = 'rgba(255, 160, 80, 0.1)';
-                glow5 = 'rgba(180, 100, 255, 0.08)';
-                glowTop = 'rgba(200, 130, 255, 0.18)';
-                particleTint = { r: 180, g: 120, b: 255 };
-                gridOpacity = 0.1;
-                scanlineOpacity = 0.05;
-                orbitalColor = 'rgba(200, 130, 255, 0.15)';
-                accentColor = '#c882ff';
-            } else if (hour >= 19 && hour < 22) {
-                // Evening - deep blue-indigo
-                periodName = '夜幕'; periodIcon = '🌙';
-                bg = '#040818';
-                glow1 = 'rgba(60, 80, 200, 0.22)';
-                glow2 = 'rgba(40, 60, 180, 0.12)';
-                glow3 = 'rgba(80, 100, 220, 0.1)';
-                glow4 = 'rgba(201, 169, 97, 0.08)';
-                glow5 = 'rgba(60, 80, 200, 0.05)';
-                glowTop = 'rgba(80, 100, 220, 0.12)';
-                particleTint = { r: 80, g: 100, b: 220 };
-                gridOpacity = 0.06;
-                scanlineOpacity = 0.03;
-                orbitalColor = 'rgba(80, 100, 220, 0.1)';
-                accentColor = '#6070cc';
-            } else {
-                // Night - very dark, subtle purple
-                periodName = '深夜'; periodIcon = '✨';
-                bg = '#020308';
-                glow1 = 'rgba(30, 40, 120, 0.18)';
-                glow2 = 'rgba(20, 30, 100, 0.1)';
-                glow3 = 'rgba(40, 50, 140, 0.08)';
-                glow4 = 'rgba(201, 169, 97, 0.05)';
-                glow5 = 'rgba(30, 40, 120, 0.04)';
-                glowTop = 'rgba(40, 50, 140, 0.1)';
-                particleTint = { r: 40, g: 60, b: 160 };
-                gridOpacity = 0.04;
-                scanlineOpacity = 0.02;
-                orbitalColor = 'rgba(40, 60, 160, 0.08)';
-                accentColor = '#3c4480';
+            function resizeStars() {
+                starCanvas.width = window.innerWidth;
+                starCanvas.height = window.innerHeight;
+                stars = [];
+                const count = Math.min(200, Math.floor(window.innerWidth / 6));
+                for (let i = 0; i < count; i++) {
+                    stars.push({
+                        x: Math.random() * starCanvas.width,
+                        y: Math.random() * starCanvas.height * 0.7,
+                        size: Math.random() * 1.5 + 0.3,
+                        baseOpacity: Math.random() * 0.6 + 0.2,
+                        twinkleSpeed: Math.random() * 0.03 + 0.01,
+                        twinkleOffset: Math.random() * Math.PI * 2,
+                        isGold: Math.random() < 0.1
+                    });
+                }
             }
+            resizeStars();
+            window.addEventListener('resize', resizeStars);
             
-            return { bg, glow1, glow2, glow3, glow4, glow5, glowTop, particleTint, gridOpacity, scanlineOpacity, orbitalColor, accentColor, periodName, periodIcon };
+            function drawStars() {
+                sctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+                starTime += 0.5;
+                stars.forEach(s => {
+                    const twinkle = 0.5 + 0.5 * Math.sin(starTime * s.twinkleSpeed + s.twinkleOffset);
+                    const opacity = s.baseOpacity * twinkle;
+                    sctx.beginPath();
+                    sctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                    if (s.isGold) {
+                        sctx.fillStyle = `rgba(255, 220, 150, ${opacity})`;
+                    } else {
+                        sctx.fillStyle = `rgba(220, 230, 255, ${opacity})`;
+                    }
+                    sctx.fill();
+                    // Glow for larger stars
+                    if (s.size > 1) {
+                        sctx.beginPath();
+                        sctx.arc(s.x, s.y, s.size * 3, 0, Math.PI * 2);
+                        sctx.fillStyle = s.isGold 
+                            ? `rgba(255, 220, 150, ${opacity * 0.15})`
+                            : `rgba(220, 230, 255, ${opacity * 0.1})`;
+                        sctx.fill();
+                    }
+                });
+                requestAnimationFrame(drawStars);
+            }
+            drawStars();
+        })();
+        
+        // === 24-Hour Natural Day/Night Cycle with Sun, Moon, Stars ===
+        // Keyframes for continuous interpolation (hour: [bgColor, glowColor, particleTint, starOpacity, sunOpacity, moonOpacity, gridOpacity])
+        const TIME_KEYFRAMES = [
+            { h: 0,    bg: [8, 6, 20],     glow: [40, 30, 90],    tint: [60, 50, 140],  star: 0.9, sun: 0,   moon: 0.7, grid: 0.03, accent: [80, 70, 160] },
+            { h: 4,    bg: [6, 8, 24],     glow: [30, 50, 120],   tint: [50, 70, 160],  star: 0.7, sun: 0,   moon: 0.9, grid: 0.035, accent: [70, 90, 170] },
+            { h: 5.5,  bg: [20, 12, 30],   glow: [200, 120, 100], tint: [180, 120, 140], star: 0.3, sun: 0.1, moon: 0.6, grid: 0.05, accent: [200, 130, 100] },
+            { h: 6.5,  bg: [30, 18, 25],   glow: [255, 180, 100], tint: [255, 180, 120], star: 0.1, sun: 0.5, moon: 0.2, grid: 0.06, accent: [255, 170, 80] },
+            { h: 8,    bg: [10, 18, 40],   glow: [100, 160, 255], tint: [100, 160, 255], star: 0,   sun: 0.8, moon: 0,   grid: 0.06, accent: [100, 160, 255] },
+            { h: 12,   bg: [8, 16, 42],    glow: [120, 180, 255], tint: [120, 170, 255], star: 0,   sun: 1,   moon: 0,   grid: 0.065, accent: [120, 180, 255] },
+            { h: 16,   bg: [10, 18, 40],   glow: [100, 150, 230], tint: [100, 150, 230], star: 0,   sun: 0.8, moon: 0,   grid: 0.06, accent: [100, 150, 230] },
+            { h: 17.5, bg: [25, 15, 35],   glow: [255, 160, 80],  tint: [220, 140, 160], star: 0.1, sun: 0.4, moon: 0.1, grid: 0.055, accent: [255, 150, 70] },
+            { h: 18.5, bg: [15, 10, 30],   glow: [180, 100, 200], tint: [180, 120, 220], star: 0.4, sun: 0.1, moon: 0.4, grid: 0.05, accent: [180, 110, 220] },
+            { h: 20,   bg: [8, 10, 30],    glow: [60, 80, 180],   tint: [80, 100, 200],  star: 0.7, sun: 0,   moon: 0.7, grid: 0.045, accent: [80, 100, 200] },
+            { h: 22,   bg: [6, 6, 22],     glow: [40, 40, 100],   tint: [60, 60, 150],   star: 0.85, sun: 0,  moon: 0.8, grid: 0.035, accent: [70, 70, 150] },
+            { h: 24,   bg: [8, 6, 20],     glow: [40, 30, 90],    tint: [60, 50, 140],  star: 0.9, sun: 0,   moon: 0.7, grid: 0.03, accent: [80, 70, 160] },
+        ];
+        
+        function lerp(a, b, t) { return a + (b - a) * t; }
+        function lerpArr(a, b, t) { return a.map((v, i) => lerp(v, b[i], t)); }
+        
+        function getTimeTheme() {
+            const now = new Date();
+            const hour = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+            
+            // Find surrounding keyframes
+            for (let i = 0; i < TIME_KEYFRAMES.length - 1; i++) {
+                const k1 = TIME_KEYFRAMES[i];
+                const k2 = TIME_KEYFRAMES[i + 1];
+                if (hour >= k1.h && hour <= k2.h) {
+                    const t = (hour - k1.h) / (k2.h - k1.h);
+                    const smoothT = t * t * (3 - 2 * t); // smoothstep
+                    return {
+                        bg: lerpArr(k1.bg, k2.bg, smoothT),
+                        glow: lerpArr(k1.glow, k2.glow, smoothT),
+                        tint: lerpArr(k1.tint, k2.tint, smoothT),
+                        accent: lerpArr(k1.accent, k2.accent, smoothT),
+                        starOpacity: lerp(k1.star, k2.star, smoothT),
+                        sunOpacity: lerp(k1.sun, k2.sun, smoothT),
+                        moonOpacity: lerp(k1.moon, k2.moon, smoothT),
+                        gridOpacity: lerp(k1.grid, k2.grid, smoothT),
+                        sunProgress: hour / 24,
+                        hour: hour
+                    };
+                }
+            }
+            // fallback
+            return { bg: [8,12,30], glow: [100,150,230], tint: [100,150,230], accent: [100,150,230],
+                     starOpacity: 0, sunOpacity: 1, moonOpacity: 0, gridOpacity: 0.06, sunProgress: 0.5, hour: 12 };
         }
+        
+        function rgb(arr) { return `rgb(${Math.round(arr[0])}, ${Math.round(arr[1])}, ${Math.round(arr[2])})`; }
+        function rgba(arr, a) { return `rgba(${Math.round(arr[0])}, ${Math.round(arr[1])}, ${Math.round(arr[2])}, ${a})`; }
         
         function applyTimeTheme() {
             const theme = getTimeTheme();
             const hero = document.querySelector('.hero');
             const grid = document.querySelector('.hero-grid');
             const scanlines = document.querySelector('.hero-scanlines');
+            const sunEl = document.getElementById('celestial-sun');
+            const moonEl = document.getElementById('celestial-moon');
+            const starsEl = document.getElementById('star-layer');
             const nav = document.getElementById('navbar');
             
             if (hero) {
-                hero.style.backgroundColor = theme.bg;
-                hero.style.setProperty('--hero-glow1', theme.glow1);
-                hero.style.setProperty('--hero-glow2', theme.glow2);
-                hero.style.setProperty('--hero-glow3', theme.glow3);
-                hero.style.setProperty('--hero-glow4', theme.glow4);
-                hero.style.setProperty('--hero-glow5', theme.glow5);
-                hero.style.setProperty('--hero-glow-top', theme.glowTop);
+                hero.style.backgroundColor = rgb(theme.bg);
+                hero.style.setProperty('--hero-glow1', rgba(theme.glow, 0.22));
+                hero.style.setProperty('--hero-glow2', rgba(theme.glow, 0.12));
+                hero.style.setProperty('--hero-glow3', rgba(theme.accent, 0.08));
+                hero.style.setProperty('--hero-glow4', rgba(theme.tint, 0.06));
+                hero.style.setProperty('--hero-glow5', rgba(theme.glow, 0.04));
+                hero.style.setProperty('--hero-glow-top', rgba(theme.glow, 0.12));
             }
-            if (grid) {
-                grid.style.opacity = theme.gridOpacity;
+            if (grid) grid.style.opacity = theme.gridOpacity;
+            if (scanlines) scanlines.style.opacity = theme.gridOpacity * 0.5;
+            
+            // Sun position: arcs across the sky
+            if (sunEl) {
+                const sunX = 10 + theme.sunProgress * 80; // 10% to 90% across
+                // Arc height: highest at noon
+                const arcT = (theme.sunProgress - 0.25) * 2; // shift so noon is peak
+                const sunY = 70 - Math.sin(Math.max(0, Math.min(Math.PI, arcT * Math.PI))) * 55;
+                sunEl.style.left = sunX + '%';
+                sunEl.style.top = sunY + '%';
+                sunEl.style.opacity = theme.sunOpacity;
+                sunEl.style.transform = 'translate(-50%, -50%)';
             }
-            if (scanlines) {
-                scanlines.style.opacity = theme.scanlineOpacity;
-            }
-            if (nav) {
-                if (window.scrollY > 50) {
-                    nav.style.background = `rgba(10, 22, 40, 0.88)`;
-                    nav.style.borderBottom = `1px solid ${theme.accentColor}33`;
+            
+            // Moon position
+            if (moonEl) {
+                let moonProgress;
+                if (theme.hour < 6) moonProgress = (theme.hour + 2) / 8; // 2am-6am
+                else moonProgress = (theme.hour - 18) / 8; // 6pm-2am
+                if (moonProgress < 0 || moonProgress > 1) {
+                    moonEl.style.opacity = 0;
+                } else {
+                    const moonX = 10 + moonProgress * 80;
+                    const arcT = (moonProgress - 0.5) * 2;
+                    const moonY = 70 - Math.sin(Math.max(0, Math.min(Math.PI, arcT * Math.PI + Math.PI/2))) * 50;
+                    moonEl.style.left = moonX + '%';
+                    moonEl.style.top = moonY + '%';
+                    moonEl.style.opacity = theme.moonOpacity;
+                    moonEl.style.transform = 'translate(-50%, -50%)';
                 }
+            }
+            
+            // Star layer
+            if (starsEl) starsEl.style.opacity = theme.starOpacity;
+            
+            // Navbar border
+            if (nav && window.scrollY > 50) {
+                nav.style.borderBottom = `1px solid ${rgba(theme.accent, 0.2)}`;
             }
             
             // Update particle tint
-            window._currentParticleTint = theme.particleTint;
-            window._currentAccentColor = theme.accentColor;
+            window._currentParticleTint = { r: Math.round(theme.tint[0]), g: Math.round(theme.tint[1]), b: Math.round(theme.tint[2]) };
+            window._currentAccentColor = rgb(theme.accent);
         }
         
         // Smooth transition
-        const style = document.createElement('style');
-        style.textContent = `.hero { transition: background-color 3s ease; }`;
-        document.head.appendChild(style);
+        const tStyle = document.createElement('style');
+        tStyle.textContent = `.hero { transition: background-color 90s linear; }
+                              .hero::before { transition: all 90s linear; }
+                              .hero-grid, .hero-scanlines { transition: opacity 120s linear; }
+                              #celestial-sun, #celestial-moon { transition: opacity 30s ease; }
+                              #star-layer { transition: opacity 60s ease; }`;
+        document.head.appendChild(tStyle);
         
         applyTimeTheme();
-        setInterval(applyTimeTheme, 5 * 60 * 1000);
+        setInterval(applyTimeTheme, 30000); // update every 30s for smooth drift
         
-        // Enhanced visible time indicator
-        function updateTimeIndicator() {
-            const theme = getTimeTheme();
-            const hour = new Date().getHours();
-            const minute = new Date().getMinutes();
-            const timeStr = String(hour).padStart(2,'0') + ':' + String(minute).padStart(2,'0');
-            
-            let indicator = document.getElementById('time-indicator');
-            if (!indicator) {
-                indicator = document.createElement('div');
-                indicator.id = 'time-indicator';
-                indicator.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9999;padding:10px 20px;border-radius:24px;font-size:0.85rem;color:#fff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);opacity:0;transition:all 1s ease;pointer-events:none;font-family:inherit;letter-spacing:1px;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
-                document.body.appendChild(indicator);
-                setTimeout(() => { indicator.style.opacity = '0.85'; }, 100);
-            }
-            indicator.style.background = `linear-gradient(135deg, ${theme.accentColor}55, ${theme.accentColor}22)`;
-            indicator.style.borderColor = `${theme.accentColor}44`;
-            indicator.style.boxShadow = `0 4px 20px rgba(0,0,0,0.3), 0 0 30px ${theme.accentColor}22`;
-            indicator.innerHTML = theme.periodIcon + ' ' + theme.periodName + ' · ' + timeStr;
-            
-            // Add pulse animation to indicator
-            indicator.style.animation = 'indicatorPulse 3s ease-in-out infinite';
-        }
-        
-        // Add pulse keyframe
-        const pulseStyle = document.createElement('style');
-        pulseStyle.textContent = `
-            @keyframes indicatorPulse {
-                0%, 100% { transform: scale(1); }
-                50% { transform: scale(1.03); }
-            }
-        `;
-        document.head.appendChild(pulseStyle);
-        
-        updateTimeIndicator();
-        setInterval(updateTimeIndicator, 60000);
-        
-        // Navbar scroll effect with time-based border
+        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            const theme = getTimeTheme();
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
-                if (navbar.classList.contains('scrolled')) {
-                    navbar.style.borderBottom = `1px solid ${theme.accentColor}33`;
-                }
+                const theme = getTimeTheme();
+                navbar.style.borderBottom = `1px solid ${rgba(theme.accent, 0.2)}`;
             } else {
                 navbar.classList.remove('scrolled');
                 navbar.style.borderBottom = 'none';
