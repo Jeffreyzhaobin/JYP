@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康科普 - 嘉悦优品 JYP | 血脂健康与营养知识科普</title>
+    <meta name="description" content="嘉悦优品健康科普专栏，提供血脂健康、益生菌、胆固醇管理、护眼营养等专业科普知识，用科学数据守护您和家人的健康。">
+    <meta name="keywords" content="胆固醇高怎么办,益生菌降胆固醇,LPLDL,植物甾醇,血脂管理,高血脂饮食,他汀副作用,嘉悦优品,益养宣">
+    <link rel="icon" type="image/png" href="../images/logo-jyp.png">
+    <meta property="og:title" content="健康科普 - 嘉悦优品 JYP">
+    <meta property="og:description" content="专业血脂健康与营养知识科普，用科学数据守护健康">
+    <meta property="og:image" content="https://jyp.hi.cn/images/logo-jyp.png">
+    <meta property="og:url" content="https://jyp.hi.cn/blog/">
+    <meta property="og:type" content="blog">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "嘉悦优品健康科普",
+      "description": "血脂健康、益生菌、营养知识专业科普",
+      "publisher": {
+        "@type": "Organization",
+        "name": "嘉悦优品",
+        "logo": {"@type": "ImageObject", "url": "https://jyp.hi.cn/images/logo-jyp.png"}
+      }
+    }
+    </script>
+    <style>
+        :root {
+            --gold: #c9a961;
+            --gold-light: #e8d5a3;
+            --gold-dark: #a0843c;
+            --gold-glow: rgba(201,169,97,0.3);
+            --navy: #0a1628;
+            --navy-light: #0d1b2a;
+            --navy-lighter: #1b2838;
+            --navy-card: #132136;
+            --white: #ffffff;
+            --gray: #8a9aab;
+            --gray-light: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        /* Navbar */
+        #navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            padding: 0 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 80px; z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(10,22,40,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,169,97,0.08);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo img { height: 40px; width: auto; }
+        .nav-logo span { color: var(--white); font-size: 1.1rem; font-weight: 500; letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a {
+            color: var(--gray-light); text-decoration: none; font-size: 0.95rem;
+            position: relative; transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -8px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--gold); }
+        .nav-links a.active::after { width: 100%; }
+        .nav-mobile { display: none; background: none; border: none; cursor: pointer; }
+        .nav-mobile svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 2; }
+
+        /* Hero */
+        .blog-hero {
+            padding: 160px 8% 80px;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(201,169,97,0.1) 0%, transparent 60%),
+                var(--navy);
+        }
+        .blog-hero .tag {
+            display: inline-block; padding: 8px 24px;
+            background: rgba(201,169,97,0.1); border: 1px solid rgba(201,169,97,0.2);
+            color: var(--gold); border-radius: 20px; font-size: 0.85rem;
+            letter-spacing: 2px; margin-bottom: 24px;
+        }
+        .blog-hero h1 {
+            font-size: 3rem; font-weight: 500; margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white), var(--gold-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .blog-hero p { color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        /* Category Filter */
+        .category-filter {
+            padding: 40px 8%;
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+        }
+        .cat-btn {
+            padding: 10px 24px; border-radius: 24px;
+            background: var(--navy-card); border: 1px solid rgba(201,169,97,0.1);
+            color: var(--gray); cursor: pointer; font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .cat-btn:hover, .cat-btn.active {
+            background: rgba(201,169,97,0.15); color: var(--gold);
+            border-color: rgba(201,169,97,0.3);
+        }
+
+        /* Article List */
+        .article-list {
+            padding: 20px 8% 100px;
+            max-width: 1200px; margin: 0 auto;
+        }
+        .article-card {
+            display: grid; grid-template-columns: 1fr 2fr; gap: 30px;
+            background: var(--navy-card); border-radius: 20px;
+            padding: 30px; margin-bottom: 30px;
+            border: 1px solid rgba(201,169,97,0.08);
+            transition: all 0.4s ease;
+            text-decoration: none; color: inherit;
+        }
+        .article-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201,169,97,0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+        .article-thumb {
+            border-radius: 12px; aspect-ratio: 4/3;
+            background: linear-gradient(135deg, var(--navy-lighter), var(--navy-card));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem;
+            border: 1px solid rgba(201,169,97,0.1);
+            overflow: hidden;
+        }
+        .article-meta { display: flex; gap: 16px; margin-bottom: 14px; align-items: center; }
+        .article-cat {
+            padding: 4px 12px; border-radius: 12px; font-size: 0.75rem;
+            background: rgba(201,169,97,0.12); color: var(--gold);
+            border: 1px solid rgba(201,169,97,0.2);
+        }
+        .article-date { color: var(--gray); font-size: 0.85rem; }
+        .article-card h2 {
+            font-size: 1.4rem; font-weight: 500; margin-bottom: 12px;
+            line-height: 1.5; transition: color 0.3s;
+        }
+        .article-card:hover h2 { color: var(--gold); }
+        .article-card p { color: var(--gray); font-size: 0.95rem; line-height: 1.8; }
+        .article-readmore {
+            margin-top: 16px; color: var(--gold); font-size: 0.9rem;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy-light);
+            padding: 60px 8% 30px;
+            border-top: 1px solid rgba(201,169,97,0.08);
+        }
+        .footer-content { max-width: 1200px; margin: 0 auto; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 30px; }
+        .footer-logo img { height: 36px; }
+        .footer-logo span { color: var(--white); font-size: 1.1rem; font-weight: 500; }
+        .footer-links { display: flex; gap: 35px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
+        .footer-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(201,169,97,0.08); color: var(--gray); font-size: 0.8rem; }
+
+        /* Pagination */
+        .pagination {
+            display: flex; justify-content: center; gap: 10px; margin-top: 40px;
+        }
+        .page-btn {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--navy-card); border: 1px solid rgba(201,169,97,0.1);
+            color: var(--gray); cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            transition: all 0.3s; font-size: 0.9rem;
+        }
+        .page-btn:hover, .page-btn.active {
+            background: rgba(201,169,97,0.15); color: var(--gold);
+            border-color: rgba(201,169,97,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links { gap: 25px; }
+            .blog-hero h1 { font-size: 2.2rem; }
+            .article-card { grid-template-columns: 1fr; }
+            .article-thumb { aspect-ratio: 16/9; }
+        }
+        @media (max-width: 768px) {
+            #navbar { padding: 0 5%; }
+            .nav-links { display: none; }
+            .nav-mobile { display: block; }
+            .blog-hero { padding: 130px 5% 60px; }
+            .blog-hero h1 { font-size: 1.8rem; }
+            .article-list { padding: 20px 5% 80px; }
+            .article-card { padding: 20px; }
+            .article-card h2 { font-size: 1.2rem; }
+            .footer-links { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <a href="../index.html" class="nav-logo">
+            <img src="../images/logo-jyp.png" alt="嘉悦优品 JYP">
+            <span>嘉悦优品</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">关于我们</a></li>
+            <li><a href="../index.html#brands">品牌矩阵</a></li>
+            <li><a href="../index.html#products">产品中心</a></li>
+            <li><a href="index.html" class="active">健康科普</a></li>
+            <li><a href="../index.html#faq">常见问题</a></li>
+            <li><a href="../index.html#contact">联系我们</a></li>
+        </ul>
+        <button class="nav-mobile" onclick="toggleMobileNav()">
+            <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="blog-hero">
+        <span class="tag">健 康 科 普</span>
+        <h1>用科学数据<br>守护每一份健康</h1>
+        <p>血脂管理、益生菌、营养知识——专业内容，通俗解读，让健康触手可及</p>
+    </section>
+
+    <!-- Category Filter -->
+    <div class="category-filter">
+        <button class="cat-btn active" data-cat="all">全部文章</button>
+        <button class="cat-btn" data-cat="血脂健康">血脂健康</button>
+        <button class="cat-btn" data-cat="益生菌">益生菌</button>
+        <button class="cat-btn" data-cat="营养科普">营养科普</button>
+        <button class="cat-btn" data-cat="护眼知识">护眼知识</button>
+    </div>
+
+    <!-- Article List -->
+    <div class="article-list" id="articleList">
+        <article class="article-card" data-category="血脂健康">
+            <div class="article-thumb">🧬</div>
+            <div>
+                <div class="article-meta">
+                    <span class="article-cat">血脂健康</span>
+                    <span class="article-date">2026-07-04</span>
+                </div>
+                <h2>胆固醇高怎么办？2026最新科学调理指南</h2>
+                <p>胆固醇高是现代人常见健康问题。本文详细解读胆固醇的作用、好坏胆固醇区别、LDL-C升高的危害，以及饮食调整、运动干预、营养补充等全方位科学调理方案。</p>
+                <span class="article-readmore">阅读全文 →</span>
+            </div>
+        </article>
+        </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="../images/logo-jyp.png" alt="嘉悦优品">
+                <span>嘉悦优品 JYP</span>
+            </div>
+            <div class="footer-links">
+                <a href="../index.html#about">关于我们</a>
+                <a href="../index.html#brands">品牌矩阵</a>
+                <a href="../index.html#products">产品中心</a>
+                <a href="index.html">健康科普</a>
+                <a href="../index.html#contact">联系我们</a>
+            </div>
+            <div class="footer-bottom">
+                © 2026 嘉悦优品 JYP. All rights reserved. | 蜀ICP备XXXXXXXX号
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        function toggleMobileNav() {
+            const links = document.querySelector('.nav-links');
+            if (links.style.display === 'flex') {
+                links.style.display = 'none';
+            } else {
+                links.style.display = 'flex';
+                links.style.flexDirection = 'column';
+                links.style.position = 'absolute';
+                links.style.top = '80px';
+                links.style.left = '0';
+                links.style.right = '0';
+                links.style.background = 'rgba(10,22,40,0.98)';
+                links.style.padding = '20px';
+                links.style.gap = '20px';
+                links.style.borderBottom = '1px solid rgba(201,169,97,0.1)';
+            }
+        }
+
+        // Category filter (simple client-side filter)
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const cat = this.dataset.cat;
+                document.querySelectorAll('.article-card').forEach(card => {
+                    if (cat === 'all' || card.dataset.category === cat) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

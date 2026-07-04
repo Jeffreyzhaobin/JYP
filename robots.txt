@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://jeffreyzhaobin.github.io/JYP/sitemap.xml
+Sitemap: https://jyp.hi.cn/sitemap.xml
