@@ -588,6 +588,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
         }
         
         .hero .subtitle {
@@ -596,6 +597,7 @@
             letter-spacing: 8px;
             margin-bottom: 30px;
             font-weight: 300;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.4);
         }
         
         .hero .tagline {
@@ -604,6 +606,7 @@
             max-width: 650px;
             margin: 0 auto 50px;
             line-height: 1.9;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.4);
         }
         
         .btn-gold {
@@ -2285,19 +2288,22 @@
         
         // === 24-Hour Natural Day/Night Cycle with Sun, Moon, Stars ===
         // Keyframes for continuous interpolation (hour: [bgColor, glowColor, particleTint, starOpacity, sunOpacity, moonOpacity, gridOpacity])
+        // Color values tuned for realistic day-night contrast: bright blue sky at noon, near-black at midnight
         const TIME_KEYFRAMES = [
-            { h: 0,    bg: [3, 2, 12],      glow: [30, 20, 70],    tint: [50, 40, 120],   star: 1.0, sun: 0,   moon: 0.8, grid: 0.025, accent: [70, 60, 150] },
-            { h: 4,    bg: [4, 4, 18],      glow: [25, 35, 90],    tint: [40, 55, 140],   star: 0.8, sun: 0,   moon: 0.95, grid: 0.03, accent: [60, 80, 160] },
-            { h: 5.5,  bg: [30, 18, 35],    glow: [255, 140, 80],  tint: [200, 130, 150], star: 0.25, sun: 0.15, moon: 0.5, grid: 0.05, accent: [255, 140, 70] },
-            { h: 6.5,  bg: [50, 30, 35],    glow: [255, 180, 80],  tint: [255, 170, 110], star: 0.05, sun: 0.55, moon: 0.15, grid: 0.06, accent: [255, 160, 60] },
-            { h: 8,    bg: [20, 40, 80],    glow: [120, 180, 255], tint: [100, 170, 255], star: 0,    sun: 0.85, moon: 0, grid: 0.065, accent: [100, 170, 255] },
-            { h: 12,   bg: [25, 55, 115],   glow: [150, 200, 255], tint: [130, 190, 255], star: 0,    sun: 1.0,  moon: 0, grid: 0.075, accent: [130, 190, 255] },
-            { h: 16,   bg: [20, 45, 95],    glow: [120, 170, 240], tint: [100, 160, 240], star: 0,    sun: 0.85, moon: 0, grid: 0.065, accent: [100, 160, 240] },
-            { h: 17.5, bg: [45, 25, 45],    glow: [255, 150, 60],  tint: [230, 130, 150], star: 0.1,  sun: 0.45, moon: 0.1, grid: 0.055, accent: [255, 140, 50] },
-            { h: 18.5, bg: [22, 12, 40],    glow: [200, 90, 220],  tint: [190, 110, 230], star: 0.45, sun: 0.12, moon: 0.45, grid: 0.05, accent: [200, 100, 230] },
-            { h: 20,   bg: [10, 10, 35],    glow: [50, 70, 170],   tint: [70, 90, 190],   star: 0.75, sun: 0,    moon: 0.75, grid: 0.04, accent: [70, 90, 190] },
-            { h: 22,   bg: [5, 4, 20],      glow: [30, 30, 90],    tint: [50, 50, 140],   star: 0.9,  sun: 0,    moon: 0.85, grid: 0.03, accent: [60, 60, 150] },
-            { h: 24,   bg: [3, 2, 12],      glow: [30, 20, 70],    tint: [50, 40, 120],   star: 1.0,  sun: 0,    moon: 0.8, grid: 0.025, accent: [70, 60, 150] },
+            { h: 0,    bg: [2, 1, 8],       glow: [25, 15, 60],    tint: [40, 30, 100],   star: 1.0, sun: 0,   moon: 0.85, grid: 0.02, accent: [60, 50, 130] },
+            { h: 4,    bg: [3, 2, 14],      glow: [20, 30, 80],    tint: [35, 50, 130],   star: 0.85, sun: 0,   moon: 0.95, grid: 0.025, accent: [50, 70, 150] },
+            { h: 5.5,  bg: [50, 25, 40],    glow: [255, 130, 70],  tint: [210, 120, 140], star: 0.2,  sun: 0.2,  moon: 0.4, grid: 0.04, accent: [255, 130, 60] },
+            { h: 6.5,  bg: [120, 70, 45],   glow: [255, 180, 90],  tint: [255, 160, 100], star: 0.03, sun: 0.6,  moon: 0.1, grid: 0.05, accent: [255, 150, 50] },
+            { h: 8,    bg: [70, 130, 200],  glow: [140, 195, 255], tint: [110, 180, 255], star: 0,    sun: 0.9,  moon: 0, grid: 0.06, accent: [110, 180, 255] },
+            { h: 10,   bg: [120, 180, 235],  glow: [170, 210, 255], tint: [140, 200, 255], star: 0,    sun: 1.0,  moon: 0, grid: 0.07, accent: [140, 200, 255] },
+            { h: 12,   bg: [135, 195, 240], glow: [180, 220, 255], tint: [150, 210, 255], star: 0,    sun: 1.0,  moon: 0, grid: 0.075, accent: [150, 210, 255] },
+            { h: 14,   bg: [125, 185, 238], glow: [175, 215, 255], tint: [145, 205, 255], star: 0,    sun: 1.0,  moon: 0, grid: 0.07, accent: [145, 205, 255] },
+            { h: 16,   bg: [80, 140, 205],  glow: [150, 200, 250], tint: [125, 185, 245], star: 0,    sun: 0.85, moon: 0, grid: 0.06, accent: [125, 185, 245] },
+            { h: 17.5, bg: [90, 45, 55],    glow: [255, 140, 55],  tint: [240, 120, 140], star: 0.1,  sun: 0.4,  moon: 0.1, grid: 0.05, accent: [255, 130, 45] },
+            { h: 18.5, bg: [35, 18, 50],    glow: [200, 85, 210],  tint: [185, 100, 225], star: 0.5,  sun: 0.1,  moon: 0.5, grid: 0.045, accent: [200, 95, 225] },
+            { h: 20,   bg: [12, 10, 38],    glow: [45, 60, 160],   tint: [65, 85, 185],   star: 0.8,  sun: 0,    moon: 0.8, grid: 0.035, accent: [65, 85, 185] },
+            { h: 22,   bg: [5, 3, 18],      glow: [28, 25, 85],    tint: [45, 45, 135],   star: 0.92, sun: 0,    moon: 0.88, grid: 0.025, accent: [55, 55, 145] },
+            { h: 24,   bg: [2, 1, 8],       glow: [25, 15, 60],    tint: [40, 30, 100],   star: 1.0,  sun: 0,    moon: 0.85, grid: 0.02, accent: [60, 50, 130] },
         ];
         
         function lerp(a, b, t) { return a + (b - a) * t; }
@@ -2354,15 +2360,30 @@
                 hero.style.setProperty('--hero-glow4', rgba(theme.tint, 0.06));
                 hero.style.setProperty('--hero-glow5', rgba(theme.glow, 0.04));
                 hero.style.setProperty('--hero-glow-top', rgba(theme.glow, 0.12));
-                // Overlay darkness - lighter in day, darker at night
+                // Overlay: thin in daytime (let bright sky show through), moderate at night
                 const brightness = (theme.bg[0] + theme.bg[1] + theme.bg[2]) / 3;
-                const dayFactor = Math.min(1, brightness / 60);
-                const midAlpha = 0.1 + (1 - dayFactor) * 0.25;
-                const botAlpha = 0.3 + (1 - dayFactor) * 0.6;
-                const bot2Alpha = 0.15 + (1 - dayFactor) * 0.4;
+                const dayFactor = Math.min(1, brightness / 130);
+                const midAlpha = 0.15 + dayFactor * 0.15;   // day 0.3, night 0.15
+                const botAlpha = 0.35 + dayFactor * 0.2;    // day 0.55, night 0.35
+                const bot2Alpha = 0.2 + dayFactor * 0.1;    // day 0.3, night 0.2
                 hero.style.setProperty('--hero-overlay-mid', `rgba(5, 10, 22, ${midAlpha.toFixed(2)})`);
                 hero.style.setProperty('--hero-overlay-bottom', `rgba(3, 6, 14, ${botAlpha.toFixed(2)})`);
                 hero.style.setProperty('--hero-overlay-bottom2', `rgba(5, 10, 22, ${bot2Alpha.toFixed(2)})`);
+                
+                // Dynamically update section background CSS variables for day-night consistency
+                // Keep sections dark enough for text readability: night=#0a1628, day=#1a2a48
+                const secR = Math.round(10 + dayFactor * 16);
+                const secG = Math.round(22 + dayFactor * 20);
+                const secB = Math.round(40 + dayFactor * 32);
+                const secLightR = Math.round(13 + dayFactor * 14);
+                const secLightG = Math.round(27 + dayFactor * 16);
+                const secLightB = Math.round(42 + dayFactor * 28);
+                const secLighterR = Math.round(27 + dayFactor * 12);
+                const secLighterG = Math.round(40 + dayFactor * 14);
+                const secLighterB = Math.round(56 + dayFactor * 20);
+                document.documentElement.style.setProperty('--navy', `rgb(${secR}, ${secG}, ${secB})`);
+                document.documentElement.style.setProperty('--navy-light', `rgb(${secLightR}, ${secLightG}, ${secLightB})`);
+                document.documentElement.style.setProperty('--navy-lighter', `rgb(${secLighterR}, ${secLighterG}, ${secLighterB})`);
             }
             if (grid) grid.style.opacity = theme.gridOpacity;
             if (scanlines) scanlines.style.opacity = theme.gridOpacity * 0.5;
