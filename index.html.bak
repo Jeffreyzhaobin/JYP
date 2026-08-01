@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <title>嘉悦优品 JYP | 专注健康食品与饮品</title>
     <meta name="description" content="嘉悦优品（JYP）是一家专注健康食品与饮品的企业，旗下拥有叫咖、留鲜君、梦小果、益养宣四大品牌，致力于为消费者提供高品质的健康产品。">
     <meta name="keywords" content="嘉悦优品,JYP,健康食品,LPLDL益生菌,叶黄素软糖,牛乳茶,益生菌,叫咖,留鲜君,梦小果,益养宣,植物乳植杆菌,血脂管理,蓝莓叶黄素,儿童护眼,大红袍牛乳茶">
@@ -394,10 +391,11 @@
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        html { scroll-behavior: smooth; scroll-padding-top: 100px; background: #0a1628; }
+        html { scroll-behavior: smooth; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: #0a1628;
+            background: var(--navy);
             color: var(--white);
             line-height: 1.6;
             overflow-x: hidden;
@@ -416,12 +414,12 @@
         }
         
         nav.scrolled {
-            background: var(--nav-bg, rgba(10, 22, 40, 0.85));
+            background: rgba(10, 22, 40, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 15px 60px;
             box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-            border-bottom: 1px solid var(--nav-border, rgba(201,169,97,0.1));
+            border-bottom: 1px solid rgba(201,169,97,0.1);
         }
         
         .nav-logo {
@@ -471,291 +469,199 @@
         
         .nav-mobile { display: none; }
         
-        /* ============================================
-           REALISTIC SKY SYSTEM v3
-           ============================================ */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            background: #040810;
             overflow: hidden;
-            padding: 120px 60px 0;
-            background: #0a1628;
+            padding: 120px 60px 80px;
         }
-
-        /* === SKY LAYERS === */
-        /* Atmosphere base gradient */
-        .sky-gradient {
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: 
+                radial-gradient(ellipse 600px 400px at 25% 30%, var(--hero-glow1, rgba(80,140,255,0.2)) 0%, transparent 60%),
+                radial-gradient(ellipse 500px 500px at 75% 20%, var(--hero-glow2, rgba(100,150,255,0.12)) 0%, transparent 55%),
+                radial-gradient(ellipse 800px 300px at 50% 80%, var(--hero-glow3, rgba(201,169,97,0.1)) 0%, transparent 60%),
+                radial-gradient(ellipse 400px 400px at 10% 70%, var(--hero-glow4, rgba(80,120,200,0.08)) 0%, transparent 50%),
+                radial-gradient(ellipse 300px 300px at 90% 60%, var(--hero-glow5, rgba(100,160,255,0.06)) 0%, transparent 50%),
+                radial-gradient(ellipse 700px 200px at 50% 10%, var(--hero-glow-top, rgba(120,180,255,0.1)) 0%, transparent 50%);
+            animation: heroBgShift 25s ease-in-out infinite;
+            pointer-events: none;
+            transition: all 3s ease;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                linear-gradient(180deg, transparent 0%, var(--hero-overlay-mid, rgba(10,22,40,0.3)) 50%, var(--hero-overlay-bottom, rgba(10,22,40,0.8)) 100%),
+                linear-gradient(0deg, transparent 0%, var(--hero-overlay-bottom2, rgba(10,22,40,0.5)) 30%, transparent 60%);
+            pointer-events: none;
+            transition: all 90s linear;
+        }
+        
+        /* Hexagonal Grid Overlay */
+        .hero-grid {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: 0;
             pointer-events: none;
+            opacity: 0.06;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpath d='M30 0L60 15v22L30 52 0 37V15z' fill='none' stroke='%23c9a961' stroke-width='0.5' stroke-opacity='0.3'/%3E%3C/svg%3E");
+            background-size: 60px 52px;
+            transition: opacity 3s ease;
         }
-
-        /* Atmospheric haze near horizon */
-        .sky-haze {
+        
+        /* Scan Lines */
+        .hero-scanlines {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 50%;
+            top: 0; left: 0; right: 0; bottom: 0;
             z-index: 0;
             pointer-events: none;
-            opacity: 0;
+            opacity: 0.03;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(120, 180, 255, 0.15) 2px,
+                rgba(120, 180, 255, 0.15) 3px
+            );
             transition: opacity 3s ease;
         }
-
-        /* Horizon glow (sunrise/sunset) */
-        .sky-horizon-glow {
+        
+        /* Orbital Ring around Logo */
+        .hero-orbital {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 45%;
-            z-index: 1;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
             pointer-events: none;
-            opacity: 0;
-            transition: opacity 3s ease;
+            width: 280px; height: 280px;
+            border-radius: 50%;
+            border: 1px solid rgba(201, 169, 97, 0.08);
+            animation: orbitalSpin 20s linear infinite;
+            margin-top: -80px;
         }
-
-        /* === CLOUDS === */
-        #cloud-canvas {
+        .hero-orbital::before {
+            content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 65%;
-            z-index: 2;
-            pointer-events: none;
-            opacity: 0.8;
-            transition: opacity 2s ease;
+            top: -4px; left: 50%;
+            width: 8px; height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold-glow);
+            animation: orbitalPulse 2s ease-in-out infinite;
         }
-
-        /* === STARS === */
+        .hero-orbital2 {
+            width: 380px; height: 380px;
+            animation: orbitalSpin 30s linear infinite reverse;
+            border-color: rgba(100, 150, 255, 0.06);
+            border-style: dashed;
+            border-width: 1px;
+        }
+        .hero-orbital2::before {
+            background: rgba(100, 150, 255, 0.8);
+            box-shadow: 0 0 20px rgba(100, 150, 255, 0.8), 0 0 40px rgba(100, 150, 255, 0.4);
+        }
+        
+        @keyframes orbitalSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes orbitalPulse {
+            0%, 100% { box-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold-glow); }
+            50% { box-shadow: 0 0 35px var(--gold), 0 0 70px var(--gold-glow); }
+        }
+        
+        /* Star layer */
         .star-layer {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1;
+            z-index: 0;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 3s ease;
+            transition: opacity 60s ease;
         }
-
-        /* === SUN === */
+        
+        /* Sun */
         .celestial-sun {
             position: absolute;
-            z-index: 3;
+            z-index: 0;
             pointer-events: none;
-            width: 240px; height: 240px;
+            width: 200px; height: 200px;
             border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,230,160,0.5) 0%, rgba(255,190,90,0.3) 25%, rgba(255,160,50,0.1) 50%, transparent 70%);
+            box-shadow: 
+                0 0 80px rgba(255, 180, 80, 0.4),
+                0 0 160px rgba(255, 140, 50, 0.2),
+                0 0 250px rgba(255, 120, 30, 0.1);
             opacity: 0;
-            transform: translate(-50%, -50%);
+            transition: opacity 30s ease, left 120s linear, top 120s linear;
         }
-        .sun-core {
+        .celestial-sun::after {
+            content: '';
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 80px; height: 80px;
             border-radius: 50%;
-            transition: background 2s ease, box-shadow 2s ease;
+            background: radial-gradient(circle, rgba(255,245,210,0.95) 0%, rgba(255,215,140,0.7) 40%, transparent 75%);
         }
-        .sun-corona {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 130px; height: 130px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(255,210,120,0.5);
-            animation: coronaSpin 40s linear infinite;
-            pointer-events: none;
-            transition: border-color 2s ease;
-        }
-        .sun-corona::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: 50%;
-            width: 4px; height: 4px;
-            background: rgba(255,240,180,0.9);
-            border-radius: 50%;
-            box-shadow: 0 0 12px rgba(255,220,130,0.9), 0 0 25px rgba(255,190,80,0.4);
-        }
-        .sun-corona2 {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 240px; height: 240px;
-            border-radius: 50%;
-            border: 1px dashed rgba(255,190,100,0.25);
-            animation: coronaSpin 60s linear infinite reverse;
-            pointer-events: none;
-        }
-        .sun-glow {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 280px; height: 280px;
-            border-radius: 50%;
-            animation: sunGlowPulse 4s ease-in-out infinite;
-            transition: background 3s ease;
-        }
-        @keyframes coronaSpin {
-            from { transform: translate(-50%,-50%) rotate(0deg); }
-            to { transform: translate(-50%,-50%) rotate(360deg); }
-        }
-        @keyframes sunGlowPulse {
-            0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
-            50% { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
-        }
-
-        /* === MOON === */
+        
+        /* Moon */
         .celestial-moon {
             position: absolute;
-            z-index: 3;
+            z-index: 0;
             pointer-events: none;
-            width: 90px; height: 90px;
+            width: 120px; height: 120px;
             border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(230,240,255,0.7) 0%, rgba(190,210,250,0.4) 35%, transparent 70%);
+            box-shadow: 
+                0 0 60px rgba(180, 200, 255, 0.3),
+                0 0 120px rgba(140, 160, 220, 0.15);
             opacity: 0;
+            transition: opacity 30s ease, left 120s linear, top 120s linear;
+        }
+        .celestial-moon::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background: radial-gradient(circle at 35% 35%, #f0f4ff 0%, #c8d5f0 40%, rgba(150,170,210,0.3) 70%, transparent 85%);
-            box-shadow:
-                0 0 30px rgba(200,220,255,0.3),
-                0 0 60px rgba(150,180,230,0.15),
-                inset -6px -5px 15px rgba(80,100,150,0.3);
-        }
-        .moon-craters {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            width: 55px; height: 55px;
             border-radius: 50%;
-            pointer-events: none;
+            background: radial-gradient(circle at 35% 35%, rgba(245,250,255,0.95) 0%, rgba(210,225,250,0.6) 50%, transparent 75%);
+            box-shadow: inset -5px -4px 12px rgba(100,120,180,0.35);
         }
-        .moon-phase {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            transition: background 60s linear;
-            pointer-events: none;
+        
+        @keyframes heroBgShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(-3%, 2%) rotate(2deg) scale(1.02); }
+            50% { transform: translate(2%, -1%) rotate(-1deg) scale(1.01); }
+            75% { transform: translate(-1%, -2%) rotate(1deg) scale(1.03); }
         }
-
-        /* === MOUNTAINS (3 layers for depth) === */
-        .mountains {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            z-index: 6;
-            pointer-events: none;
-            height: 480px;
-        }
-        .mountains svg {
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 100%;
-            transition: fill 3s ease;
-        }
-        .mountain-far { opacity: 0.5; transition: opacity 5s ease; }
-        .mountain-far path { fill: #5a7a9a; }
-        .mountain-mid { opacity: 0.85; transition: opacity 5s ease; }
-        .mountain-mid path { fill: #3d5a7a; }
-        .mountain-near { opacity: 1; transition: opacity 5s ease; }
-        .mountain-near path { fill: #1e3a52; }
-
-        /* === PARTICLES/CANVAS === */
+        
         #particle-canvas {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 2;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-
-        /* === Crepuscular rays canvas === */
-        #rays-canvas {
-            position: absolute;
-            top: -30%; left: 0;
-            width: 100%; height: 130%;
-            z-index: 2;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 2s ease;
-            mix-blend-mode: screen;
-        }
-
-        /* === Subtle tech grid (night only) === */
-        .hero-grid {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
             z-index: 1;
-            pointer-events: none;
-            opacity: 0;
-            background-image:
-                linear-gradient(rgba(201,169,97,0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(201,169,97,0.025) 1px, transparent 1px);
-            background-size: 100px 100px;
-            transition: opacity 3s ease;
+            opacity: 0.9;
         }
-
-        /* === Bottom fade to next section === */
-        .hero-bottom-fade {
-            position: absolute;
-            bottom: -1px; left: 0; right: 0;
-            height: 350px;
-            z-index: 7;
-            pointer-events: none;
-        }
-
-        /* === Vignette (subtle) === */
-        .hero-vignette {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 4;
-            pointer-events: none;
-            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.25) 100%);
-            transition: opacity 2s ease;
-        }
-
-        /* === Orbital rings around logo === */
-        .hero-orbital {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 5;
-            pointer-events: none;
-            width: 280px; height: 280px;
-            border-radius: 50%;
-            border: 1px solid rgba(201,169,97,0.06);
-            animation: orbitalSpin 50s linear infinite;
-            margin-top: -50px;
-        }
-        .hero-orbital::before {
-            content: '';
-            position: absolute;
-            top: -3px; left: 50%;
-            width: 5px; height: 5px;
-            background: var(--gold);
-            border-radius: 50%;
-            box-shadow: 0 0 12px var(--gold), 0 0 25px var(--gold-glow);
-            animation: orbitalPulse 3s ease-in-out infinite;
-        }
-        .hero-orbital2 {
-            width: 380px; height: 380px;
-            animation: orbitalSpin 70s linear infinite reverse;
-            border-color: rgba(100,150,255,0.04);
-            border-style: dashed;
-        }
-        .hero-orbital2::before {
-            background: rgba(100,150,255,0.5);
-            box-shadow: 0 0 10px rgba(100,150,255,0.4), 0 0 20px rgba(100,150,255,0.2);
-        }
-        @keyframes orbitalSpin {
-            from { transform: translate(-50%,-50%) rotate(0deg); }
-            to { transform: translate(-50%,-50%) rotate(360deg); }
-        }
-        @keyframes orbitalPulse {
-            0%,100% { box-shadow: 0 0 12px var(--gold), 0 0 25px var(--gold-glow); opacity: 0.7; }
-            50% { box-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold-glow); opacity: 1; }
-        }
-
+        
         .hero-content {
             position: relative;
-            z-index: 20;
+            z-index: 2;
             text-align: center;
             max-width: 900px;
         }
@@ -865,7 +771,7 @@
         }
         
         /* Sections */
-        section { padding: 120px 60px; position: relative; scroll-margin-top: 100px; }
+        section { padding: 120px 60px; position: relative; }
         
         .section-header {
             text-align: center;
@@ -897,12 +803,8 @@
         
         /* About */
         .about {
-            background: linear-gradient(180deg, #0a1628 0%, #162a44 100%);
             background: linear-gradient(180deg, var(--navy) 0%, var(--navy-lighter) 100%);
             position: relative;
-            margin-top: -260px;
-            padding-top: 340px;
-            z-index: 10;
         }
         .about::before {
             content: '';
@@ -1095,8 +997,7 @@
         }
         
         /* Brands */
-        .brands { background: linear-gradient(180deg, #162a44 0%, #0a1628 100%);
-            background: linear-gradient(180deg, var(--navy-lighter) 0%, var(--navy) 100%); }
+        .brands { background: linear-gradient(180deg, var(--navy-lighter) 0%, var(--navy) 100%); }
         
         .brand-grid {
             display: grid;
@@ -1370,7 +1271,7 @@
         }
         
         .feature-icon {
-            width: 80px; height: 80px;
+            width: 70px; height: 70px;
             margin: 0 auto 25px;
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             border-radius: 50%;
@@ -1684,19 +1585,11 @@
                 stroke-width: 2;
             }
             
-            .hero { padding: 60px 25px 0; min-height: 100vh; align-items: flex-start; }
-            .hero-logo { width: 68px; margin-bottom: 5px; }
-            .hero h1 { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 2px; }
-            .hero .subtitle { font-size: 0.78rem; letter-spacing: 2px; margin-bottom: 2px; }
-            .hero .tagline { font-size: 0.68rem; margin-bottom: 8px; line-height: 1.4; max-width: 260px; }
-            .btn-gold { padding: 8px 18px; font-size: 0.75rem; margin-bottom: 0; }
-            .scroll-indicator { display: none; }
-            #time-indicator { bottom: 12px; right: 12px; padding: 4px 10px; font-size: 0.58rem; }
-            .celestial-sun { width: 140px !important; height: 140px !important; }
-            .sun-core { width: 55px !important; height: 55px !important; }
-            .sun-glow { width: 180px !important; height: 180px !important; }
+            .hero { padding: 100px 25px 60px; }
+            .hero h1 { font-size: 2.2rem; letter-spacing: 4px; }
+            .hero .subtitle { font-size: 1.1rem; letter-spacing: 3px; }
             
-            section, .timeline, .features { padding: 60px 25px; scroll-margin-top: 70px; }
+            section, .timeline, .features { padding: 60px 25px; }
             .section-header h2 { font-size: 1.8rem; }
             
             .about-grid { grid-template-columns: 1fr; gap: 60px; }
@@ -1755,85 +1648,19 @@
         <a href="#contact" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">联系我们</a>
     </div>
     
-    <!-- Hero - Realistic Sky System v3 -->
-    <section class="hero" id="hero">
-        <!-- Sky gradient background -->
-        <div class="sky-gradient" id="sky-gradient"></div>
-        <div class="sky-haze" id="sky-haze"></div>
-        <div class="sky-horizon-glow" id="sky-horizon-glow"></div>
-
-        <!-- Crepuscular rays -->
-        <canvas id="rays-canvas"></canvas>
-
-        <!-- Clouds -->
-        <canvas id="cloud-canvas"></canvas>
-
-        <!-- Stars (night) -->
-        <canvas id="star-layer" class="star-layer"></canvas>
-
-        <!-- Sun ambient daylight (wide glow) -->
-        <div id="sun-ambient" style="position:absolute;z-index:2;pointer-events:none;border-radius:50%;opacity:0;"></div>
-        <!-- Sun -->
-        <div id="celestial-sun" class="celestial-sun">
-            <div class="sun-glow" id="sun-glow"></div>
-            <div class="sun-corona2"></div>
-            <div class="sun-corona"></div>
-            <div class="sun-core" id="sun-core"></div>
-        </div>
-
-        <!-- Moon -->
-        <div id="celestial-moon" class="celestial-moon">
-            <svg class="moon-craters" viewBox="0 0 80 80">
-                <circle cx="22" cy="28" r="5" fill="rgba(130,150,190,0.2)"/>
-                <circle cx="45" cy="20" r="3.5" fill="rgba(130,150,190,0.15)"/>
-                <circle cx="55" cy="42" r="6" fill="rgba(130,150,190,0.18)"/>
-                <circle cx="30" cy="50" r="4" fill="rgba(130,150,190,0.12)"/>
-                <circle cx="15" cy="45" r="3" fill="rgba(130,150,190,0.15)"/>
-                <circle cx="50" cy="58" r="2.5" fill="rgba(130,150,190,0.1)"/>
-            </svg>
-            <div class="moon-phase" id="moon-phase"></div>
-        </div>
-
-        <!-- Particles -->
+    <!-- Hero -->
+    <section class="hero">
         <canvas id="particle-canvas"></canvas>
-
-        <!-- Tech grid (night only) -->
         <div class="hero-grid"></div>
-
-        <!-- Mountains (3 layers) -->
-        <div class="mountains" id="mountains">
-            <!-- Far mountains (hazy, blue-tinted) -->
-            <svg class="mountain-far" id="mtn-far" viewBox="0 0 1440 480" preserveAspectRatio="none">
-                <path d="M0,350 Q80,250 170,290 Q260,180 370,240 Q460,130 570,200 Q660,150 760,210 Q850,120 960,180 Q1050,150 1150,200 Q1240,130 1340,185 Q1400,160 1440,195 L1440,480 L0,480Z" id="mtn-far-path" fill="#5a7a9a"/>
-            </svg>
-            <!-- Mid mountains -->
-            <svg class="mountain-mid" id="mtn-mid" viewBox="0 0 1440 480" preserveAspectRatio="none">
-                <path d="M0,380 Q90,270 190,320 Q280,190 400,260 Q490,140 600,220 Q690,170 800,230 Q890,130 1000,200 Q1090,160 1200,220 Q1290,150 1380,205 Q1420,180 1440,220 L1440,480 L0,480Z" id="mtn-mid-path" fill="#3d5a7a"/>
-            </svg>
-            <!-- Near mountains (darkest, most detail) -->
-            <svg class="mountain-near" id="mtn-near" viewBox="0 0 1440 480" preserveAspectRatio="none">
-                <path d="M0,420 L70,300 L140,350 L210,230 L290,290 L370,170 L460,240 L540,130 L630,200 L710,95 L800,160 L880,70 L970,140 L1050,85 L1140,150 L1220,100 L1320,165 L1390,130 L1440,170 L1440,480 L0,480Z" id="mtn-near-path" fill="#1e3a52"/>
-            </svg>
-            <!-- Atmospheric perspective haze -->
-            <div id="mtn-haze" style="position:absolute;bottom:0;left:0;width:100%;height:40%;pointer-events:none;z-index:1;transition:background 5s ease;"></div>
-        </div>
-
-        <!-- Vignette -->
-        <div class="hero-vignette"></div>
-
-        <!-- Bottom fade to content -->
-        <div class="hero-bottom-fade" id="hero-bottom-fade"></div>
-
-        <!-- Time indicator -->
-        <div id="time-indicator" style="position:absolute;bottom:20px;right:20px;z-index:30;padding:6px 14px;border-radius:20px;background:rgba(0,0,0,0.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:rgba(255,255,255,0.7);font-size:0.7rem;font-family:system-ui,-apple-system,sans-serif;letter-spacing:1px;pointer-events:none;transition:all 0.5s ease;">
-            <span id="time-label">上午</span> <span id="time-value">--:--</span>
-        </div>
-
-        <!-- Orbital rings -->
+        <div class="hero-scanlines"></div>
+        <!-- Star layer (canvas for twinkling stars) -->
+        <canvas id="star-layer" class="star-layer"></canvas>
+        <!-- Sun -->
+        <div id="celestial-sun" class="celestial-sun"></div>
+        <!-- Moon -->
+        <div id="celestial-moon" class="celestial-moon"></div>
         <div class="hero-orbital"></div>
         <div class="hero-orbital hero-orbital2"></div>
-
-        <!-- Content -->
         <div class="hero-content">
             <img src="images/logo-jyp.png" alt="嘉悦优品 JYP" class="hero-logo">
             <h1>嘉悦优品</h1>
@@ -1841,7 +1668,6 @@
             <p class="tagline">专注健康食品与饮品，以科学配方与匠心工艺，为每一个家庭带来自然、健康、优质的生活体验。我们相信，健康是一种生活态度。</p>
             <a href="#products" class="btn-gold">探索产品</a>
         </div>
-
         <div class="scroll-indicator">
             <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </div>
@@ -2315,739 +2141,431 @@
     </footer>
     
     <script>
-        // ============================================
-        // REALISTIC SKY SYSTEM v3 - COMPLETE JS
-        // ============================================
-
-        // Utility functions
-        function lerp(a,b,t){return a+(b-a)*t;}
-        function lerpArr(a,b,t){return a.map((v,i)=>lerp(v,b[i],t));}
-        function clamp(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
-        function smooth(t){return t*t*(3-2*t);}
-        function safeArr(v,fallback){return (v&&Array.isArray(v)&&v.length>=3)?v:fallback;}
-        function rgb(a){a=safeArr(a,[10,22,40]);return `rgb(${Math.round(a[0])},${Math.round(a[1])},${Math.round(a[2])})`;}
-        function rgba(a,al){a=safeArr(a,[10,22,40]);return `rgba(${Math.round(a[0])},${Math.round(a[1])},${Math.round(a[2])},${al})`;}
-        function hexToRgb(hex){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return[r,g,b];}
-        function mixColors(c1,c2,t){return c1.map((v,i)=>Math.round(lerp(v,c2[i],t)));}
-
-        // Moon phase (simplified)
-        function getMoonPhase(){
-            const now=new Date();
-            const known=new Date(2026,0,18);
-            const days=(now-known)/(86400000);
-            return ((days%29.53)+29.53)%29.53/29.53;
+        // Sci-Fi Particle Animation - ENHANCED
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let shootingStars = [];
+        let dataStreams = [];
+        let time = 0;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-
-        // === TIME KEYFRAMES (14 keyframes for smooth transitions) ===
-        // Each keyframe: hour, sky top/mid/bottom, atmosphere, horizon color,
-        //   sun/moon/star/cloud opacities, cloud tint, particle mode/tint, nav mode
-        const TK = [
-            // Midnight
-            {h:0,   sT:[4,3,15],   sM:[10,8,35],  sB:[18,14,50],  at:[30,25,75],  hz:[0,0,0],       sn:0,  mn:0.9, st:1.0, co:0.15, ct:[35,45,90],  gr:0.3, ry:0,   pm:'night',pt:[70,90,180],  nm:'night'},
-            // Pre-dawn
-            {h:4.5, sT:[10,6,30],  sM:[25,18,60], sB:[50,30,75],  at:[40,30,100],hz:[70,35,90],   sn:0,  mn:0.75,st:0.75,co:0.2, ct:[45,55,110], gr:0.2, ry:0,   pm:'night',pt:[60,80,160],  nm:'night'},
-            // Dawn (first light)
-            {h:5.5, sT:[35,18,55], sM:[90,45,80], sB:[200,90,60], at:[220,90,50],hz:[255,130,50],sn:0.2,mn:0.25,st:0.1, co:0.4,  ct:[230,150,90], gr:0.05,ry:0.4, pm:'dawn', pt:[255,170,90],  nm:'trans'},
-            // Sunrise
-            {h:6.5, sT:[80,110,180],sM:[190,140,80],sB:[255,175,75],at:[255,150,50],hz:[255,120,30],sn:0.75,mn:0,  st:0,   co:0.6, ct:[255,200,130],gr:0,   ry:0.8, pm:'dawn', pt:[255,200,130], nm:'trans'},
-            // Early morning
-            {h:8,   sT:[75,145,220],sM:[135,185,235],sB:[195,215,245],at:[155,195,250],hz:[200,220,250],sn:0.95,mn:0, st:0,   co:0.7, ct:[255,255,255],gr:0,   ry:0.35,pm:'day', pt:[255,240,195],  nm:'day'},
-            // Late morning
-            {h:10,  sT:[65,135,215],sM:[115,175,235],sB:[175,205,240],at:[135,185,250],hz:[185,210,245],sn:1.0, mn:0, st:0,   co:0.65, ct:[255,255,255],gr:0,   ry:0.15,pm:'day', pt:[255,240,200],  nm:'day'},
-            // Noon
-            {h:12,  sT:[55,125,210],sM:[105,165,230],sB:[165,195,235],at:[125,175,245],hz:[180,205,240],sn:1.0, mn:0, st:0,   co:0.6, ct:[255,255,255],gr:0,   ry:0.08,pm:'day', pt:[255,245,210],  nm:'day'},
-            // Afternoon
-            {h:15,  sT:[65,130,205],sM:[125,170,225],sB:[190,195,225],at:[145,180,240],hz:[215,195,190],sn:0.95,mn:0, st:0,   co:0.65, ct:[255,250,235],gr:0,   ry:0.2, pm:'day', pt:[255,225,165],  nm:'day'},
-            // Golden hour
-            {h:17,  sT:[85,100,170],sM:[185,120,85], sB:[250,160,70], at:[255,130,45],hz:[255,100,30],sn:0.75,mn:0, st:0,   co:0.65, ct:[255,190,100], gr:0,   ry:0.7, pm:'dusk',pt:[255,180,100],  nm:'trans'},
-            // Sunset
-            {h:18.3,sT:[35,22,75],  sM:[110,45,90],  sB:[240,90,40],  at:[230,60,30], hz:[230,60,20], sn:0.4, mn:0.25,st:0.15,co:0.5, ct:[240,130,70], gr:0.05,ry:0.9, pm:'dusk',pt:[240,130,70],   nm:'trans'},
-            // Dusk
-            {h:19.5,sT:[12,8,42],   sM:[35,25,80],   sB:[70,35,95],   at:[55,35,130], hz:[90,40,80],  sn:0,   mn:0.65,st:0.55,co:0.3, ct:[70,55,130],  gr:0.15,ry:0.15,pm:'dusk',pt:[130,100,200], nm:'trans'},
-            // Early night
-            {h:21,  sT:[5,4,20],    sM:[10,8,38],    sB:[18,12,52],   at:[28,25,85],  hz:[15,15,50],  sn:0,   mn:0.85,st:0.85,co:0.2, ct:[35,45,95],   gr:0.25,ry:0,   pm:'night',pt:[75,95,185],   nm:'night'},
-            // Late night
-            {h:23,  sT:[4,3,16],    sM:[8,6,32],     sB:[14,10,42],   at:[24,20,68],  hz:[0,0,0],     sn:0,   mn:0.9, st:0.95,co:0.15, ct:[30,40,85],   gr:0.3, ry:0,   pm:'night',pt:[65,85,170],   nm:'night'},
-            {h:24,  sT:[4,3,15],    sM:[10,8,35],    sB:[18,14,50],   at:[30,25,75],  hz:[0,0,0],     sn:0,   mn:0.9, st:1.0, co:0.15, ct:[35,45,90],   gr:0.3, ry:0,   pm:'night',pt:[70,90,180],   nm:'night'},
-        ];
-
-        // === TIME SYSTEM ===
-        // Demo mode: full day/night cycle in 120 seconds so changes are visible
-        // Set USE_REAL_TIME = true to use actual system time instead
-        const USE_REAL_TIME = true;
-        const DEMO_CYCLE_SECONDS = 120;
-        let _demoStart = Date.now();
-
-        function getTimeTheme(){
-            let hour;
-            if(USE_REAL_TIME){
-                const now=new Date();
-                hour=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
-            }else{
-                const elapsed=(Date.now()-_demoStart)/1000;
-                const cyclePos=(elapsed%DEMO_CYCLE_SECONDS)/DEMO_CYCLE_SECONDS;
-                hour=6+cyclePos*24; // start at sunrise (6am)
-                if(hour>=24)hour-=24;
+        resizeCanvas();
+        window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.3;
+                this.baseSize = this.size;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.15;
+                this.baseOpacity = this.opacity;
+                this.pulseSpeed = Math.random() * 0.025 + 0.005;
+                this.pulseOffset = Math.random() * Math.PI * 2;
+                this.isBlue = Math.random() < 0.35;
+                this.isAccent = Math.random() < 0.2;
             }
-            for(let i=0;i<TK.length-1;i++){
-                const a=TK[i],b=TK[i+1];
-                if(hour>=a.h&&hour<=b.h){
-                    const t=smooth((hour-a.h)/(b.h-a.h));
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                this.opacity = this.baseOpacity + Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.25;
+                this.size = this.baseSize + Math.sin(time * this.pulseSpeed * 0.7 + this.pulseOffset) * 0.6;
+            }
+            draw() {
+                const tint = window._currentParticleTint || { r: 100, g: 160, b: 255 };
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, Math.max(0.1, this.size), 0, Math.PI * 2);
+                if (this.isAccent) {
+                    ctx.fillStyle = `rgba(201, 169, 97, ${Math.max(0, this.opacity)})`;
+                } else if (this.isBlue) {
+                    ctx.fillStyle = `rgba(${tint.r}, ${tint.g}, ${tint.b}, ${Math.max(0, this.opacity)})`;
+                } else {
+                    ctx.fillStyle = `rgba(${Math.floor(tint.r * 0.7)}, ${Math.floor(tint.g * 0.8)}, ${Math.floor(tint.b * 0.9)}, ${Math.max(0, this.opacity * 0.7)})`;
+                }
+                ctx.fill();
+                // Glow effect
+                if (this.baseSize > 1.2) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, Math.max(0.1, this.size * 3.5), 0, Math.PI * 2);
+                    if (this.isAccent) {
+                        ctx.fillStyle = `rgba(201, 169, 97, ${Math.max(0, this.opacity * 0.08)})`;
+                    } else {
+                        ctx.fillStyle = `rgba(${tint.r}, ${tint.g}, ${tint.b}, ${Math.max(0, this.opacity * 0.08)})`;
+                    }
+                    ctx.fill();
+                }
+            }
+        }
+        
+        class ShootingStar {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height * 0.5;
+                this.length = Math.random() * 100 + 50;
+                this.speed = Math.random() * 10 + 5;
+                this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.7 + 0.3;
+                this.life = 0;
+                this.maxLife = Math.random() * 80 + 40;
+                this.isGold = Math.random() < 0.4;
+            }
+            update() {
+                this.x += Math.cos(this.angle) * this.speed;
+                this.y += Math.sin(this.angle) * this.speed;
+                this.life++;
+                this.opacity = Math.max(0, this.opacity - 0.008);
+                if (this.life > this.maxLife || this.opacity <= 0) this.reset();
+            }
+            draw() {
+                const tailX = this.x - Math.cos(this.angle) * this.length;
+                const tailY = this.y - Math.sin(this.angle) * this.length;
+                const tint = window._currentParticleTint || { r: 100, g: 160, b: 255 };
+                const gradient = ctx.createLinearGradient(tailX, tailY, this.x, this.y);
+                if (this.isGold) {
+                    gradient.addColorStop(0, 'rgba(201, 169, 97, 0)');
+                    gradient.addColorStop(1, `rgba(255, 220, 150, ${this.opacity})`);
+                } else {
+                    gradient.addColorStop(0, `rgba(${tint.r}, ${tint.g}, ${tint.b}, 0)`);
+                    gradient.addColorStop(1, `rgba(${Math.min(255, tint.r + 60)}, ${Math.min(255, tint.g + 60)}, ${Math.min(255, tint.b + 60)}, ${this.opacity})`);
+                }
+                ctx.beginPath();
+                ctx.moveTo(tailX, tailY);
+                ctx.lineTo(this.x, this.y);
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                // Head glow
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = this.isGold ? `rgba(255, 220, 150, ${this.opacity})` : `rgba(${Math.min(255, tint.r + 80)}, ${Math.min(255, tint.g + 80)}, ${Math.min(255, tint.b + 80)}, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+        
+        // Data Stream (vertical flowing lines)
+        class DataStream {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.length = Math.random() * 120 + 60;
+                this.speed = Math.random() * 1.5 + 0.5;
+                this.opacity = Math.random() * 0.15 + 0.05;
+                this.width = Math.random() * 1.5 + 0.5;
+            }
+            update() {
+                this.y += this.speed;
+                if (this.y > canvas.height + this.length) {
+                    this.reset();
+                }
+            }
+            draw() {
+                const tint = window._currentParticleTint || { r: 100, g: 160, b: 255 };
+                const gradient = ctx.createLinearGradient(this.x, this.y - this.length, this.x, this.y);
+                gradient.addColorStop(0, `rgba(${tint.r}, ${tint.g}, ${tint.b}, 0)`);
+                gradient.addColorStop(0.5, `rgba(${tint.r}, ${tint.g}, ${tint.b}, ${this.opacity})`);
+                gradient.addColorStop(1, `rgba(${tint.r}, ${tint.g}, ${tint.b}, 0)`);
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y - this.length);
+                ctx.lineTo(this.x, this.y);
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = this.width;
+                ctx.stroke();
+            }
+        }
+        
+        function initParticles() {
+            particles = [];
+            const count = Math.min(180, Math.floor(window.innerWidth / 7));
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+            shootingStars = [];
+            for (let i = 0; i < 4; i++) {
+                shootingStars.push(new ShootingStar());
+            }
+            dataStreams = [];
+            for (let i = 0; i < 15; i++) {
+                dataStreams.push(new DataStream());
+            }
+        }
+        initParticles();
+        
+        function connectParticles() {
+            const tint = window._currentParticleTint || { r: 100, g: 160, b: 255 };
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 150) {
+                        const opacity = 0.12 * (1 - distance / 150);
+                        ctx.beginPath();
+                        const gradient = ctx.createLinearGradient(
+                            particles[i].x, particles[i].y, particles[j].x, particles[j].y
+                        );
+                        if (particles[i].isAccent || particles[j].isAccent) {
+                            gradient.addColorStop(0, `rgba(201, 169, 97, ${opacity})`);
+                            gradient.addColorStop(1, `rgba(${tint.r}, ${tint.g}, ${tint.b}, ${opacity})`);
+                        } else {
+                            gradient.addColorStop(0, `rgba(${tint.r}, ${tint.g}, ${tint.b}, ${opacity})`);
+                            gradient.addColorStop(1, `rgba(${tint.r}, ${tint.g}, ${tint.b}, ${opacity})`);
+                        }
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            time++;
+            dataStreams.forEach(s => { s.update(); s.draw(); });
+            particles.forEach(p => { p.update(); p.draw(); });
+            connectParticles();
+            shootingStars.forEach(s => { s.update(); s.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+        
+        // Starfield canvas - twinkling stars for night time
+        (function initStarLayer() {
+            const starCanvas = document.getElementById('star-layer');
+            if (!starCanvas) return;
+            const sctx = starCanvas.getContext('2d');
+            let stars = [];
+            let starTime = 0;
+            
+            function resizeStars() {
+                starCanvas.width = window.innerWidth;
+                starCanvas.height = window.innerHeight;
+                stars = [];
+                const count = Math.min(350, Math.floor(window.innerWidth / 4));
+                for (let i = 0; i < count; i++) {
+                    stars.push({
+                        x: Math.random() * starCanvas.width,
+                        y: Math.random() * starCanvas.height * 0.7,
+                        size: Math.random() * 1.5 + 0.3,
+                        baseOpacity: Math.random() * 0.6 + 0.2,
+                        twinkleSpeed: Math.random() * 0.03 + 0.01,
+                        twinkleOffset: Math.random() * Math.PI * 2,
+                        isGold: Math.random() < 0.1
+                    });
+                }
+            }
+            resizeStars();
+            window.addEventListener('resize', resizeStars);
+            
+            function drawStars() {
+                sctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+                starTime += 0.5;
+                stars.forEach(s => {
+                    const twinkle = 0.5 + 0.5 * Math.sin(starTime * s.twinkleSpeed + s.twinkleOffset);
+                    const opacity = s.baseOpacity * twinkle;
+                    sctx.beginPath();
+                    sctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                    if (s.isGold) {
+                        sctx.fillStyle = `rgba(255, 220, 150, ${opacity})`;
+                    } else {
+                        sctx.fillStyle = `rgba(220, 230, 255, ${opacity})`;
+                    }
+                    sctx.fill();
+                    // Glow for larger stars
+                    if (s.size > 1) {
+                        sctx.beginPath();
+                        sctx.arc(s.x, s.y, s.size * 3, 0, Math.PI * 2);
+                        sctx.fillStyle = s.isGold 
+                            ? `rgba(255, 220, 150, ${opacity * 0.15})`
+                            : `rgba(220, 230, 255, ${opacity * 0.1})`;
+                        sctx.fill();
+                    }
+                });
+                requestAnimationFrame(drawStars);
+            }
+            drawStars();
+        })();
+        
+        // === 24-Hour Natural Day/Night Cycle with Sun, Moon, Stars ===
+        // Keyframes for continuous interpolation (hour: [bgColor, glowColor, particleTint, starOpacity, sunOpacity, moonOpacity, gridOpacity])
+        // Color values tuned for realistic day-night contrast: bright blue sky at noon, near-black at midnight
+        const TIME_KEYFRAMES = [
+            { h: 0,    bg: [2, 1, 8],       glow: [25, 15, 60],    tint: [40, 30, 100],   star: 1.0, sun: 0,   moon: 0.85, grid: 0.02, accent: [60, 50, 130] },
+            { h: 4,    bg: [3, 2, 14],      glow: [20, 30, 80],    tint: [35, 50, 130],   star: 0.85, sun: 0,   moon: 0.95, grid: 0.025, accent: [50, 70, 150] },
+            { h: 5.5,  bg: [50, 25, 40],    glow: [255, 130, 70],  tint: [210, 120, 140], star: 0.2,  sun: 0.2,  moon: 0.4, grid: 0.04, accent: [255, 130, 60] },
+            { h: 6.5,  bg: [120, 70, 45],   glow: [255, 180, 90],  tint: [255, 160, 100], star: 0.03, sun: 0.6,  moon: 0.1, grid: 0.05, accent: [255, 150, 50] },
+            { h: 8,    bg: [70, 130, 200],  glow: [140, 195, 255], tint: [110, 180, 255], star: 0,    sun: 0.9,  moon: 0, grid: 0.06, accent: [110, 180, 255] },
+            { h: 10,   bg: [120, 180, 235],  glow: [170, 210, 255], tint: [140, 200, 255], star: 0,    sun: 1.0,  moon: 0, grid: 0.07, accent: [140, 200, 255] },
+            { h: 12,   bg: [135, 195, 240], glow: [180, 220, 255], tint: [150, 210, 255], star: 0,    sun: 1.0,  moon: 0, grid: 0.075, accent: [150, 210, 255] },
+            { h: 14,   bg: [125, 185, 238], glow: [175, 215, 255], tint: [145, 205, 255], star: 0,    sun: 1.0,  moon: 0, grid: 0.07, accent: [145, 205, 255] },
+            { h: 16,   bg: [80, 140, 205],  glow: [150, 200, 250], tint: [125, 185, 245], star: 0,    sun: 0.85, moon: 0, grid: 0.06, accent: [125, 185, 245] },
+            { h: 17.5, bg: [90, 45, 55],    glow: [255, 140, 55],  tint: [240, 120, 140], star: 0.1,  sun: 0.4,  moon: 0.1, grid: 0.05, accent: [255, 130, 45] },
+            { h: 18.5, bg: [35, 18, 50],    glow: [200, 85, 210],  tint: [185, 100, 225], star: 0.5,  sun: 0.1,  moon: 0.5, grid: 0.045, accent: [200, 95, 225] },
+            { h: 20,   bg: [12, 10, 38],    glow: [45, 60, 160],   tint: [65, 85, 185],   star: 0.8,  sun: 0,    moon: 0.8, grid: 0.035, accent: [65, 85, 185] },
+            { h: 22,   bg: [5, 3, 18],      glow: [28, 25, 85],    tint: [45, 45, 135],   star: 0.92, sun: 0,    moon: 0.88, grid: 0.025, accent: [55, 55, 145] },
+            { h: 24,   bg: [2, 1, 8],       glow: [25, 15, 60],    tint: [40, 30, 100],   star: 1.0,  sun: 0,    moon: 0.85, grid: 0.02, accent: [60, 50, 130] },
+        ];
+        
+        function lerp(a, b, t) { return a + (b - a) * t; }
+        function lerpArr(a, b, t) { return a.map((v, i) => lerp(v, b[i], t)); }
+        
+        function getTimeTheme() {
+            const now = new Date();
+            const hour = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+            
+            // Find surrounding keyframes
+            for (let i = 0; i < TIME_KEYFRAMES.length - 1; i++) {
+                const k1 = TIME_KEYFRAMES[i];
+                const k2 = TIME_KEYFRAMES[i + 1];
+                if (hour >= k1.h && hour <= k2.h) {
+                    const t = (hour - k1.h) / (k2.h - k1.h);
+                    const smoothT = t * t * (3 - 2 * t); // smoothstep
                     return {
-                        sT:lerpArr(a.sT,b.sT,t), sM:lerpArr(a.sM,b.sM,t), sB:lerpArr(a.sB,b.sB,t),
-                        at:lerpArr(a.at,b.at,t), hz:lerpArr(a.hz,b.hz,t),
-                        sn:lerp(a.sn,b.sn,t), mn:lerp(a.mn,b.mn,t), st:lerp(a.st,b.st,t),
-                        co:lerp(a.co,b.co,t), ct:lerpArr(a.ct,b.ct,t),
-                        gr:lerp(a.gr,b.gr,t), ry:lerp(a.ry,b.ry,t),
-                        pm:t<0.5?a.pm:b.pm, pt:lerpArr(a.pt,b.pt,t),
-                        nm:t<0.5?a.nm:b.nm,
-                        sp:hour/24, hour, mp:getMoonPhase()
+                        bg: lerpArr(k1.bg, k2.bg, smoothT),
+                        glow: lerpArr(k1.glow, k2.glow, smoothT),
+                        tint: lerpArr(k1.tint, k2.tint, smoothT),
+                        accent: lerpArr(k1.accent, k2.accent, smoothT),
+                        starOpacity: lerp(k1.star, k2.star, smoothT),
+                        sunOpacity: lerp(k1.sun, k2.sun, smoothT),
+                        moonOpacity: lerp(k1.moon, k2.moon, smoothT),
+                        gridOpacity: lerp(k1.grid, k2.grid, smoothT),
+                        sunProgress: hour / 24,
+                        hour: hour
                     };
                 }
             }
-            return {sT:[55,125,210],sM:[105,165,230],sB:[165,195,235],at:[125,175,245],hz:[180,205,240],
-                    sn:1,mn:0,st:0,co:0.6,ct:[255,255,255],gr:0,ry:0.08,pm:'day',pt:[255,245,210],nm:'day',sp:0.5,hour:12,mp:0.5};
+            // fallback
+            return { bg: [8,12,30], glow: [100,150,230], tint: [100,150,230], accent: [100,150,230],
+                     starOpacity: 0, sunOpacity: 1, moonOpacity: 0, gridOpacity: 0.06, sunProgress: 0.5, hour: 12 };
         }
-
-        function formatHour(h){
-            const hh=Math.floor(h)%24;
-            const mm=Math.floor((h%1)*60);
-            const period=hh>=12?'下午':'上午';
-            const h12=hh%12||12;
-            return period+' '+h12+':'+(mm<10?'0':'')+mm;
-        }
-
-        // === CLOUD SYSTEM (puffy realistic clouds) ===
-        const cloudCv=document.getElementById('cloud-canvas');
-        const cloudCtx=cloudCv?cloudCv.getContext('2d'):null;
-        let clouds=[];
-        let _cloudTint=[255,255,255],_cloudOp=0.6;
-
-        function initClouds(){
-            if(!cloudCtx||!cloudCv)return;
-            const dpr=window.devicePixelRatio||1;
-            cloudCv.width=window.innerWidth*dpr;
-            cloudCv.height=window.innerHeight*0.65*dpr;
-            cloudCv.style.width=window.innerWidth+'px';
-            cloudCv.style.height=(window.innerHeight*0.65)+'px';
-            cloudCtx.scale(dpr,dpr);
-            clouds=[];
-            const isMob=window.innerWidth<768;
-            const cnt=isMob?14:28;
-            for(let i=0;i<cnt;i++){
-                const layer=Math.random()<0.4?0:1;
-                const baseSpeed=layer===0?0.05:0.12;
-                const scale=layer===0?0.6+Math.random()*0.3:1+Math.random()*0.5;
-                clouds.push({
-                    x:Math.random()*(window.innerWidth+600)-300,
-                    y:Math.random()*(window.innerHeight*0.4)+30,
-                    w:(isMob?140:260)*scale,
-                    h:(isMob?42:70)*scale,
-                    speed:baseSpeed*(0.7+layer*0.3)+Math.random()*0.15,
-                    op:0.45+Math.random()*0.4,
-                    layer,
-                    puffs:generatePuffData(isMob?6:9)
-                });
+        
+        function rgb(arr) { return `rgb(${Math.round(arr[0])}, ${Math.round(arr[1])}, ${Math.round(arr[2])})`; }
+        function rgba(arr, a) { return `rgba(${Math.round(arr[0])}, ${Math.round(arr[1])}, ${Math.round(arr[2])}, ${a})`; }
+        
+        function applyTimeTheme() {
+            const theme = getTimeTheme();
+            const hero = document.querySelector('.hero');
+            const grid = document.querySelector('.hero-grid');
+            const scanlines = document.querySelector('.hero-scanlines');
+            const sunEl = document.getElementById('celestial-sun');
+            const moonEl = document.getElementById('celestial-moon');
+            const starsEl = document.getElementById('star-layer');
+            const nav = document.getElementById('navbar');
+            
+            if (hero) {
+                hero.style.backgroundColor = rgb(theme.bg);
+                hero.style.setProperty('--hero-glow1', rgba(theme.glow, 0.22));
+                hero.style.setProperty('--hero-glow2', rgba(theme.glow, 0.12));
+                hero.style.setProperty('--hero-glow3', rgba(theme.accent, 0.08));
+                hero.style.setProperty('--hero-glow4', rgba(theme.tint, 0.06));
+                hero.style.setProperty('--hero-glow5', rgba(theme.glow, 0.04));
+                hero.style.setProperty('--hero-glow-top', rgba(theme.glow, 0.12));
+                // Overlay: thin in daytime (let bright sky show through), moderate at night
+                const brightness = (theme.bg[0] + theme.bg[1] + theme.bg[2]) / 3;
+                const dayFactor = Math.min(1, brightness / 130);
+                const midAlpha = 0.15 + dayFactor * 0.15;   // day 0.3, night 0.15
+                const botAlpha = 0.35 + dayFactor * 0.2;    // day 0.55, night 0.35
+                const bot2Alpha = 0.2 + dayFactor * 0.1;    // day 0.3, night 0.2
+                hero.style.setProperty('--hero-overlay-mid', `rgba(5, 10, 22, ${midAlpha.toFixed(2)})`);
+                hero.style.setProperty('--hero-overlay-bottom', `rgba(3, 6, 14, ${botAlpha.toFixed(2)})`);
+                hero.style.setProperty('--hero-overlay-bottom2', `rgba(5, 10, 22, ${bot2Alpha.toFixed(2)})`);
+                
+                // Dynamically update section background CSS variables for day-night consistency
+                // Keep sections dark enough for text readability: night=#0a1628, day=#1a2a48
+                const secR = Math.round(10 + dayFactor * 16);
+                const secG = Math.round(22 + dayFactor * 20);
+                const secB = Math.round(40 + dayFactor * 32);
+                const secLightR = Math.round(13 + dayFactor * 14);
+                const secLightG = Math.round(27 + dayFactor * 16);
+                const secLightB = Math.round(42 + dayFactor * 28);
+                const secLighterR = Math.round(27 + dayFactor * 12);
+                const secLighterG = Math.round(40 + dayFactor * 14);
+                const secLighterB = Math.round(56 + dayFactor * 20);
+                document.documentElement.style.setProperty('--navy', `rgb(${secR}, ${secG}, ${secB})`);
+                document.documentElement.style.setProperty('--navy-light', `rgb(${secLightR}, ${secLightG}, ${secLightB})`);
+                document.documentElement.style.setProperty('--navy-lighter', `rgb(${secLighterR}, ${secLighterG}, ${secLighterB})`);
             }
-            clouds.sort((a,b)=>a.layer-b.layer);
-        }
-
-        function generatePuffData(count){
-            const puffs=[];
-            for(let i=0;i<count;i++){
-                puffs.push({
-                    ox:(Math.random()-0.5)*0.85,
-                    oy:(Math.random()-0.5)*0.45,
-                    r:0.4+Math.random()*0.7
-                });
+            if (grid) grid.style.opacity = theme.gridOpacity;
+            if (scanlines) scanlines.style.opacity = theme.gridOpacity * 0.5;
+            
+            // Sun position: arcs across the sky
+            if (sunEl) {
+                const sunX = 10 + theme.sunProgress * 80; // 10% to 90% across
+                // Arc height: highest at noon
+                const arcT = (theme.sunProgress - 0.25) * 2; // shift so noon is peak
+                const sunY = 70 - Math.sin(Math.max(0, Math.min(Math.PI, arcT * Math.PI))) * 55;
+                sunEl.style.left = sunX + '%';
+                sunEl.style.top = sunY + '%';
+                sunEl.style.opacity = theme.sunOpacity;
+                sunEl.style.transform = 'translate(-50%, -50%)';
             }
-            return puffs;
-        }
-
-        function drawPuffyCloud(ctx,x,y,w,h,tint,opacity){
-            const r=Math.round(tint[0]),g=Math.round(tint[1]),b=Math.round(tint[2]);
-            ctx.save();
-            const sunFromLeft=_sunX<0.5;
-            const numP=11;
-            const puffArr=[];
-            for(let i=0;i<numP;i++){
-                const t=i/(numP-1);
-                const puffR=h*(0.28+Math.sin(i*1.9+i*0.3+x*0.008)*0.18);
-                puffArr.push({
-                    px: w*(0.04+t*0.92)+Math.sin(i*2.3+x*0.012)*w*0.06,
-                    py: h*(0.42+Math.cos(i*1.5)*0.15),
-                    pr: puffR, isEdge:i===0||i===numP-1, isTop:false
-                });
-            }
-            for(let i=0;i<7;i++){
-                const topR=h*(0.15+Math.sin(i*2.7+i*0.7)*0.1);
-                puffArr.push({
-                    px: w*(0.1+i*0.13)+Math.cos(i*2.5)*w*0.07,
-                    py: h*(0.08+Math.sin(i*1.8)*0.07)-topR*0.3,
-                    pr: topR, isEdge:false, isTop:true
-                });
-            }
-            for(let i=0;i<3;i++){
-                puffArr.push({
-                    px: w*(0.25+i*0.25)+(Math.random()-0.5)*w*0.1,
-                    py: h*(0.25+Math.random()*0.12),
-                    pr: h*(0.1+Math.random()*0.08),
-                    isEdge:false, isTop:false
-                });
-            }
-            puffArr.sort((a,b)=>b.py-a.py);
-            // Dark flat base
-            ctx.fillStyle=`rgba(${Math.round(r*0.42)},${Math.round(g*0.48)},${Math.round(b*0.62)},${opacity*0.45})`;
-            ctx.beginPath();
-            ctx.ellipse(x+w*0.5,y+h*0.8,w*0.52,h*0.16,0,0,Math.PI*2);
-            ctx.fill();
-            // Shadows
-            for(const p of puffArr){
-                ctx.fillStyle=`rgba(${Math.round(r*0.48)},${Math.round(g*0.52)},${Math.round(b*0.68)},${opacity*0.25})`;
-                ctx.beginPath();
-                ctx.ellipse(x+p.px+p.pr*0.08,y+p.py+p.pr*0.38,p.pr*1.05,p.pr*0.42,0,0,Math.PI*2);
-                ctx.fill();
-            }
-            // Main body
-            for(const p of puffArr){
-                const br=p.isTop?20:10;
-                ctx.fillStyle=`rgba(${Math.min(255,r+br)},${Math.min(255,g+br*0.85)},${Math.min(255,b+br*0.3)},${Math.min(0.95,opacity*0.93)})`;
-                ctx.beginPath();
-                ctx.ellipse(x+p.px,y+p.py,p.pr*1.12,p.pr*0.92,0,0,Math.PI*2);
-                ctx.fill();
-            }
-            // Rim light (sun-facing edge)
-            for(const p of puffArr){
-                if(p.py<h*0.6){
-                    const hlOff=sunFromLeft?-p.pr*0.18:p.pr*0.18;
-                    ctx.fillStyle=`rgba(255,255,255,${opacity*0.35})`;
-                    ctx.beginPath();
-                    ctx.ellipse(x+p.px+hlOff,y+p.py-p.pr*0.25,p.pr*0.4,p.pr*0.3,-0.1,0,Math.PI*2);
-                    ctx.fill();
+            
+            // Moon position
+            if (moonEl) {
+                let moonProgress;
+                if (theme.hour < 6) moonProgress = (theme.hour + 2) / 8; // 2am-6am
+                else moonProgress = (theme.hour - 18) / 8; // 6pm-2am
+                if (moonProgress < 0 || moonProgress > 1) {
+                    moonEl.style.opacity = 0;
+                } else {
+                    const moonX = 10 + moonProgress * 80;
+                    const arcT = (moonProgress - 0.5) * 2;
+                    const moonY = 70 - Math.sin(Math.max(0, Math.min(Math.PI, arcT * Math.PI + Math.PI/2))) * 50;
+                    moonEl.style.left = moonX + '%';
+                    moonEl.style.top = moonY + '%';
+                    moonEl.style.opacity = theme.moonOpacity;
+                    moonEl.style.transform = 'translate(-50%, -50%)';
                 }
             }
-            // Bright highlights on tops
-            ctx.fillStyle=`rgba(255,255,255,${opacity*0.45})`;
-            for(const p of puffArr){
-                if(p.isTop){
-                    ctx.beginPath();
-                    ctx.ellipse(x+p.px+(sunFromLeft?p.pr*0.05:-p.pr*0.05),y+p.py-p.pr*0.12,p.pr*0.28,p.pr*0.18,0,0,Math.PI*2);
-                    ctx.fill();
-                }
+            
+            // Star layer
+            if (starsEl) starsEl.style.opacity = theme.starOpacity;
+            
+            // Navbar border
+            if (nav && window.scrollY > 50) {
+                nav.style.borderBottom = `1px solid ${rgba(theme.accent, 0.2)}`;
             }
-            ctx.restore();
+            
+            // Update particle tint
+            window._currentParticleTint = { r: Math.round(theme.tint[0]), g: Math.round(theme.tint[1]), b: Math.round(theme.tint[2]) };
+            window._currentAccentColor = rgb(theme.accent);
         }
-
-        function animateClouds(){
-            if(!cloudCtx)return;
-            const dpr=window.devicePixelRatio||1;
-            cloudCtx.clearRect(0,0,cloudCv.width/dpr,cloudCv.height/dpr);
-            clouds.forEach(c=>{
-                const op=c.op*_cloudOp*(c.layer===0?0.7:1);
-                drawPuffyCloud(cloudCtx,c.x,c.y,c.w,c.h,_cloudTint,op);
-                c.x+=c.speed;
-                if(c.x>window.innerWidth+c.w){c.x=-c.w*2-Math.random()*200;c.y=Math.random()*(window.innerHeight*0.4)+30;c.op=0.45+Math.random()*0.4;}
-            });
-            requestAnimationFrame(animateClouds);
-        }
-
-        // === STAR SYSTEM ===
-        const starCv=document.getElementById('star-layer');
-        const starCtx=starCv?starCv.getContext('2d'):null;
-        let stars=[];
-
-        function initStars(){
-            if(!starCtx||!starCv)return;
-            const dpr=window.devicePixelRatio||1;
-            starCv.width=window.innerWidth*dpr;
-            starCv.height=window.innerHeight*dpr;
-            starCv.style.width=window.innerWidth+'px';
-            starCv.style.height=window.innerHeight+'px';
-            starCtx.scale(dpr,dpr);
-            stars=[];
-            const isMob=window.innerWidth<768;
-            const cnt=isMob?80:220;
-            for(let i=0;i<cnt;i++){
-                const b=Math.random();
-                stars.push({
-                    x:Math.random()*window.innerWidth,
-                    y:Math.random()*window.innerHeight,
-                    r:b>0.92?1.5+Math.random()*0.8:0.4+Math.random()*0.7,
-                    b,
-                    sp:0.5+Math.random()*2.5,
-                    off:Math.random()*Math.PI*2
-                });
-            }
-        }
-
-        function drawStars(){
-            if(!starCtx)return;
-            starCtx.clearRect(0,0,window.innerWidth,window.innerHeight);
-            const t=Date.now()/1000;
-            stars.forEach(s=>{
-                const tw=0.3+0.7*Math.abs(Math.sin(t*s.sp+s.off));
-                const a=tw*s.b*0.8;
-                starCtx.beginPath();
-                starCtx.arc(s.x,s.y,s.r,0,Math.PI*2);
-                starCtx.fillStyle=`rgba(255,255,255,${a})`;
-                starCtx.fill();
-                if(s.r>1.2){
-                    starCtx.beginPath();
-                    starCtx.arc(s.x,s.y,s.r*3,0,Math.PI*2);
-                    starCtx.fillStyle=`rgba(210,225,255,${a*0.08})`;
-                    starCtx.fill();
-                }
-            });
-            requestAnimationFrame(drawStars);
-        }
-
-        // === PARTICLES (dust motes by day, data network by night) ===
-        const pCv=document.getElementById('particle-canvas');
-        const pCtx=pCv?pCv.getContext('2d'):null;
-        let parts=[],shooters=[],_pMode='night',_pTint=[80,100,200];
-
-        function initParts(){
-            if(!pCtx||!pCv)return;
-            const dpr=window.devicePixelRatio||1;
-            pCv.width=window.innerWidth*dpr;
-            pCv.height=window.innerHeight*dpr;
-            pCv.style.width=window.innerWidth+'px';
-            pCv.style.height=window.innerHeight+'px';
-            pCtx.scale(dpr,dpr);
-            const isMob=window.innerWidth<768;
-            const cnt=isMob?25:60;
-            parts=[];
-            for(let i=0;i<cnt;i++)parts.push(newP());
-            shooters=[];
-        }
-
-        function newP(){
-            const p={x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:0,vy:0,sz:1+Math.random()*2,acc:Math.random()<0.12};
-            resetP(p);
-            return p;
-        }
-
-        function resetP(p){
-            p.x=Math.random()*window.innerWidth;
-            p.y=Math.random()*window.innerHeight;
-            if(_pMode==='day'||_pMode==='dawn'||_pMode==='dusk'){
-                p.vx=(Math.random()-0.5)*0.15;
-                p.vy=-0.08-Math.random()*0.15;
-                p.sz=0.8+Math.random()*1.8;
-            }else{
-                p.vx=(Math.random()-0.5)*0.35;
-                p.vy=(Math.random()-0.5)*0.35;
-                p.sz=1.2+Math.random()*1.8;
-            }
-            return p;
-        }
-
-        function animateParts(){
-            if(!pCtx)return;
-            pCtx.clearRect(0,0,window.innerWidth,window.innerHeight);
-            const r=Math.round(_pTint[0]),g=Math.round(_pTint[1]),b=Math.round(_pTint[2]);
-
-            if(_pMode==='night'){
-                // Network connections at night
-                for(let i=0;i<parts.length;i++){
-                    for(let j=i+1;j<parts.length;j++){
-                        const dx=parts[i].x-parts[j].x,dy=parts[i].y-parts[j].y;
-                        const d=Math.sqrt(dx*dx+dy*dy);
-                        if(d<130){
-                            const a=(1-d/130)*0.12;
-                            pCtx.beginPath();pCtx.moveTo(parts[i].x,parts[i].y);pCtx.lineTo(parts[j].x,parts[j].y);
-                            pCtx.strokeStyle=`rgba(${r},${g},${b},${a})`;pCtx.lineWidth=0.5;pCtx.stroke();
-                        }
-                    }
-                }
-            }
-
-            parts.forEach(p=>{
-                p.x+=p.vx;p.y+=p.vy;
-                if(_pMode==='day'||_pMode==='dawn'||_pMode==='dusk'){
-                    p.vx+=(Math.random()-0.5)*0.015;
-                    // Dust mote with soft glow
-                    const a=0.2+Math.sin(Date.now()/2000+p.x)*0.2;
-                    pCtx.beginPath();pCtx.arc(p.x,p.y,p.sz,0,Math.PI*2);
-                    pCtx.fillStyle=`rgba(${r},${g},${b},${a})`;pCtx.fill();
-                    pCtx.beginPath();pCtx.arc(p.x,p.y,p.sz*3,0,Math.PI*2);
-                    pCtx.fillStyle=`rgba(${r},${g},${b},${a*0.12})`;pCtx.fill();
-                    if(p.y<-10||p.x<-10||p.x>window.innerWidth+10)resetP(p);
-                }else{
-                    if(p.x<0||p.x>window.innerWidth)p.vx*=-1;
-                    if(p.y<0||p.y>window.innerHeight)p.vy*=-1;
-                    const a=p.acc?0.7:0.35;
-                    pCtx.beginPath();pCtx.arc(p.x,p.y,p.sz,0,Math.PI*2);
-                    pCtx.fillStyle=`rgba(${r},${g},${b},${a})`;pCtx.fill();
-                }
-            });
-
-            // Shooting stars (night only)
-            if(_pMode==='night'&&Math.random()<0.001&&shooters.length<2){
-                const s={x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight*0.3,
-                    len:60+Math.random()*100,sp:7+Math.random()*7,ang:Math.PI/4+(Math.random()-0.5)*0.5,
-                    op:0,active:true};
-                shooters.push(s);
-            }
-            shooters=shooters.filter(s=>s.active);
-            shooters.forEach(s=>{
-                s.x+=Math.cos(s.ang)*s.sp;s.y+=Math.sin(s.ang)*s.sp;s.op=Math.min(1,s.op+0.06);
-                if(s.x>window.innerWidth+s.len||s.y>window.innerHeight+s.len)s.active=false;
-                const grd=pCtx.createLinearGradient(s.x,s.y,s.x-Math.cos(s.ang)*s.len,s.y-Math.sin(s.ang)*s.len);
-                grd.addColorStop(0,`rgba(255,255,255,${s.op*0.8})`);grd.addColorStop(1,'rgba(255,255,255,0)');
-                pCtx.beginPath();pCtx.moveTo(s.x,s.y);pCtx.lineTo(s.x-Math.cos(s.ang)*s.len,s.y-Math.sin(s.ang)*s.len);
-                pCtx.strokeStyle=grd;pCtx.lineWidth=1.5;pCtx.stroke();
-            });
-
-            requestAnimationFrame(animateParts);
-        }
-
-        // === CREPUSCULAR RAYS ===
-        const raysCv=document.getElementById('rays-canvas');
-        const raysCtx=raysCv?raysCv.getContext('2d'):null;
-        let _rayOp=0,_sunX=0.5,_sunY=0.7;
-
-        function drawRays(){
-            if(!raysCtx)return;
-            const dpr=window.devicePixelRatio||1;
-            raysCv.width=window.innerWidth*dpr;raysCv.height=window.innerHeight*1.3*dpr;
-            raysCv.style.width=window.innerWidth+'px';raysCv.style.height=(window.innerHeight*1.3)+'px';
-            raysCtx.scale(dpr,dpr);
-            function frame(){
-                raysCtx.clearRect(0,0,window.innerWidth,window.innerHeight*1.3);
-                if(_rayOp<0.02){requestAnimationFrame(frame);return;}
-                const cx=_sunX*window.innerWidth,cy=_sunY*window.innerHeight*0.8;
-                for(let i=0;i<10;i++){
-                    const ang=(i/10)*Math.PI*2+Math.sin(Date.now()/6000+i)*0.015;
-                    const sp=0.018+Math.sin(i*2.1)*0.008;
-                    const grd=raysCtx.createLinearGradient(cx,cy,cx+Math.cos(ang)*window.innerHeight*2,cy+Math.sin(ang)*window.innerHeight*2);
-                    const a=_rayOp*(0.04+Math.sin(i*1.5+Date.now()/4000)*0.02);
-                    grd.addColorStop(0,`rgba(255,220,140,${a})`);
-                    grd.addColorStop(0.4,`rgba(255,170,70,${a*0.4})`);
-                    grd.addColorStop(1,'rgba(255,140,50,0)');
-                    raysCtx.beginPath();raysCtx.moveTo(cx,cy);
-                    raysCtx.lineTo(cx+Math.cos(ang-sp)*window.innerHeight*2,cy+Math.sin(ang-sp)*window.innerHeight*2);
-                    raysCtx.lineTo(cx+Math.cos(ang+sp)*window.innerHeight*2,cy+Math.sin(ang+sp)*window.innerHeight*2);
-                    raysCtx.closePath();raysCtx.fillStyle=grd;raysCtx.fill();
-                }
-                requestAnimationFrame(frame);
-            }
-            frame();
-        }
-
-        // === MAIN THEME APPLICATION ===
-        function applyTheme(){
-            const th=getTimeTheme();
-            const hero=document.getElementById('hero');
-            const skyG=document.getElementById('sky-gradient');
-            const skyHz=document.getElementById('sky-haze');
-            const skyHzG=document.getElementById('sky-horizon-glow');
-            const grid=document.querySelector('.hero-grid');
-            const sunEl=document.getElementById('celestial-sun');
-            const moonEl=document.getElementById('celestial-moon');
-            const starsEl=document.getElementById('star-layer');
-            const cloudEl=document.getElementById('cloud-canvas');
-            const raysEl=document.getElementById('rays-canvas');
-            const bottomFade=document.getElementById('hero-bottom-fade');
-            const nav=document.getElementById('navbar');
-
-            // Calculate day factor for section backgrounds
-            const bright=(th.sT[0]+th.sT[1]+th.sT[2])/3;
-            const df=clamp(bright/100,0,1);
-
-            // Update CSS custom properties for sections
-            const nr=Math.round(10+df*12),ng=Math.round(22+df*16),nb=Math.round(40+df*24);
-            const nr2=Math.round(13+df*10),ng2=Math.round(27+df*14),nb2=Math.round(42+df*20);
-            const nr3=Math.round(27+df*10),ng3=Math.round(40+df*12),nb3=Math.round(56+df*16);
-            document.documentElement.style.setProperty('--navy',`rgb(${nr},${ng},${nb})`);
-            document.documentElement.style.setProperty('--navy-light',`rgb(${nr2},${ng2},${nb2})`);
-            document.documentElement.style.setProperty('--navy-lighter',`rgb(${nr3},${ng3},${nb3})`);
-
-            // Navbar
-            let navBg,navBd;
-            if(th.nm==='day'){navBg='rgba(255,255,255,0.12)';navBd='rgba(255,255,255,0.15)';}
-            else if(th.nm==='trans'){navBg='rgba(20,20,50,0.7)';navBd=rgba(th.at,0.15);}
-            else{navBg='rgba(10,22,40,0.85)';navBd='rgba(201,169,97,0.1)';}
-            document.documentElement.style.setProperty('--nav-bg',navBg);
-            document.documentElement.style.setProperty('--nav-border',navBd);
-            if(nav&&window.scrollY>50){
-                nav.classList.add('scrolled');
-                nav.style.borderBottom=`1px solid ${navBd}`;
-            }
-
-            // Sky gradient
-            if(skyG){
-                skyG.style.background=`linear-gradient(180deg,
-                    ${rgb(th.sT)} 0%,
-                    ${rgb(lerpArr(th.sT,th.sM,0.4))} 25%,
-                    ${rgb(th.sM)} 50%,
-                    ${rgb(lerpArr(th.sM,th.sB,0.5))} 75%,
-                    ${rgb(th.sB)} 100%)`;
-            }
-
-            // Atmospheric haze
-            if(skyHz){
-                skyHz.style.background=`
-                    radial-gradient(ellipse 1000px 600px at 20% 15%,${rgba(th.at,0.18)} 0%,transparent 60%),
-                    radial-gradient(ellipse 800px 500px at 80% 20%,${rgba(th.at,0.12)} 0%,transparent 55%),
-                    radial-gradient(ellipse 1400px 600px at 50% 0%,${rgba(th.at,0.1)} 0%,transparent 55%),
-                    radial-gradient(ellipse 1200px 400px at 50% 80%,${rgba(th.sB,0.15)} 0%,transparent 70%)`;
-                skyHz.style.opacity=1;
-            }
-
-            // Horizon glow (sunrise/sunset)
-            if(skyHzG){
-                skyHzG.style.background=`
-                    radial-gradient(ellipse 1600px 600px at 50% 100%,${rgba(th.hz,0.45)} 0%,transparent 70%),
-                    radial-gradient(ellipse 1000px 400px at 50% 100%,${rgba(th.hz,0.3)} 0%,transparent 60%),
-                    radial-gradient(ellipse 2000px 300px at 50% 100%,${rgba(th.hz,0.15)} 0%,transparent 80%)`;
-                skyHzG.style.opacity=th.ry>0.1?1:0;
-            }
-
-            // Bottom fade - seamless blend, mountains dissolve naturally into content
-            if(bottomFade){
-                const fadeCol=[nr,ng,nb];
-                bottomFade.style.background=`linear-gradient(180deg,
-                    transparent 0%,
-                    transparent 35%,
-                    ${rgba(fadeCol,0.04)} 50%,
-                    ${rgba(fadeCol,0.15)} 65%,
-                    ${rgba(fadeCol,0.4)} 78%,
-                    ${rgba(fadeCol,0.7)} 88%,
-                    ${rgba(fadeCol,0.92)} 96%,
-                    ${rgb(fadeCol)} 100%)`;
-            }
-
-            // Mountains color - realistic atmospheric perspective
-            const mtnFar=document.getElementById('mtn-far-path');
-            const mtnMid=document.getElementById('mtn-mid-path');
-            const mtnNear=document.getElementById('mtn-near-path');
-            const warmT=th.ry; // 0-1, peaks at sunrise/sunset
-            let mtnFarC, mtnMidC, mtnNearC;
-            if(th.nm==='night'){
-                mtnFarC=[18+df*6, 22+df*8, 50+df*12];
-                mtnMidC=[10+df*4, 14+df*6, 32+df*10];
-                mtnNearC=[4+df*2, 6+df*4, 15+df*6];
-            }else if(warmT>0.3){
-                mtnFarC=[110+warmT*80, 85+warmT*25, 95+df*15];
-                mtnMidC=[65+warmT*45, 45+warmT*15, 58+df*10];
-                mtnNearC=[30+warmT*22, 18+warmT*6, 25+df*5];
-            }else{
-                mtnFarC=[115+df*25, 135+df*25, 165+df*20];
-                mtnMidC=[58+df*18, 75+df*18, 88+df*15];
-                mtnNearC=[20+df*10, 30+df*10, 35+df*8];
-            }
-            if(mtnFar)mtnFar.setAttribute('fill',rgb(mtnFarC));
-            if(mtnMid)mtnMid.setAttribute('fill',rgb(mtnMidC));
-            if(mtnNear)mtnNear.setAttribute('fill',rgb(mtnNearC));
-            // Very light atmospheric haze on mountains (don't obscure silhouette)
-            const mtnHaze=document.getElementById('mtn-haze');
-            if(mtnHaze){
-                mtnHaze.style.background=`linear-gradient(to bottom, transparent 0%, transparent 50%, ${rgba(mtnFarC,0.08)} 100%)`;
-            }
-
-            // Grid
-            if(grid)grid.style.opacity=th.gr;
-
-            // Sun position
-            if(sunEl){
-                const sunX=8+th.sp*84;
-                const arcT=(th.sp-0.25)*2;
-                const sunY=78-Math.sin(Math.max(0,Math.min(Math.PI,arcT*Math.PI)))*62;
-                sunEl.style.left=sunX+'%';
-                sunEl.style.top=sunY+'%';
-                sunEl.style.opacity=th.sn;
-                _sunX=sunX/100;_sunY=sunY/100;_rayOp=th.ry;
-                // Sun height factor (0=at horizon, 1=overhead)
-                const sunHt=clamp(1-sunY/100,0,1);
-                // Wide ambient daylight glow
-                const sunAmb=document.getElementById('sun-ambient');
-                if(sunAmb){
-                    const ambSize=window.innerHeight*1.5;
-                    sunAmb.style.width=ambSize+'px';
-                    sunAmb.style.height=ambSize+'px';
-                    sunAmb.style.left=sunX+'%';
-                    sunAmb.style.top=sunY+'%';
-                    sunAmb.style.transform='translate(-50%,-50%)';
-                    sunAmb.style.opacity=th.sn*(sunHt<0.25?0.3:0.2);
-                    if(sunHt<0.25){
-                        sunAmb.style.background=`radial-gradient(circle,${rgba(th.hz,0.15)} 0%,${rgba(th.hz,0.05)} 30%,transparent 60%)`;
-                    }else{
-                        sunAmb.style.background=`radial-gradient(circle,rgba(255,230,150,0.12) 0%,rgba(200,220,255,0.04) 30%,transparent 60%)`;
-                    }
-                }
-
-                // Sun core color (redder at horizon)
-                const sunCore=document.getElementById('sun-core');
-                const sunGlow=document.getElementById('sun-glow');
-                if(sunCore){
-                    if(sunHt<0.25){
-                        sunCore.style.background=`radial-gradient(circle,rgba(255,240,180,1) 0%,rgba(255,170,60,0.95) 25%,rgba(255,90,25,0.75) 55%,rgba(255,50,10,0.3) 75%,transparent 90%)`;
-                        sunCore.style.boxShadow=`0 0 40px rgba(255,180,70,1),0 0 80px rgba(255,110,30,0.8),0 0 150px rgba(255,70,15,0.5),0 0 280px rgba(255,40,5,0.25),0 0 450px rgba(255,30,0,0.12)`;
-                    }else{
-                        sunCore.style.background=`radial-gradient(circle,rgba(255,255,245,1) 0%,rgba(255,240,170,0.98) 25%,rgba(255,210,100,0.85) 55%,rgba(255,180,60,0.4) 75%,transparent 90%)`;
-                        sunCore.style.boxShadow=`0 0 40px rgba(255,245,180,1),0 0 80px rgba(255,210,100,0.8),0 0 140px rgba(255,180,60,0.5),0 0 250px rgba(255,150,40,0.25),0 0 400px rgba(255,120,20,0.1)`;
-                    }
-                }
-                if(sunGlow){
-                    if(sunHt<0.25){
-                        sunGlow.style.background=`radial-gradient(circle,rgba(255,160,50,0.35) 0%,rgba(255,100,20,0.2) 30%,rgba(255,60,10,0.08) 55%,transparent 75%)`;
-                    }else{
-                        sunGlow.style.background=`radial-gradient(circle,rgba(255,230,140,0.3) 0%,rgba(255,200,90,0.15) 30%,rgba(255,170,50,0.05) 55%,transparent 75%)`;
-                    }
-                }
-            }
-
-            // Rays
-            if(raysEl)raysEl.style.opacity=th.ry;
-
-            // Moon
-            if(moonEl){
-                let mPr;
-                if(th.hour<6)mPr=(th.hour+2)/8;else mPr=(th.hour-18)/8;
-                if(mPr<0||mPr>1){moonEl.style.opacity=0;}
-                else{
-                    const mX=8+mPr*84;
-                    const arcT=(mPr-0.5)*2;
-                    const mY=72-Math.sin(Math.max(0,Math.min(Math.PI,arcT*Math.PI+Math.PI/2)))*52;
-                    moonEl.style.left=mX+'%';moonEl.style.top=mY+'%';moonEl.style.opacity=th.mn;
-                    // Moon phase shadow
-                    const mpEl=document.getElementById('moon-phase');
-                    if(mpEl){
-                        const ph=th.mp; // 0=new, 0.25=first qtr, 0.5=full, 0.75=last qtr
-                        if(ph<0.5){
-                            // Waxing - shadow on left
-                            const sx=100-ph*200;
-                            mpEl.style.background=`radial-gradient(circle at ${sx}% 50%,rgba(5,8,20,0.9) 0%,rgba(5,8,20,0.7) 35%,transparent 55%)`;
-                        }else{
-                            // Waning - shadow on right
-                            const sx=(ph-0.5)*200;
-                            mpEl.style.background=`radial-gradient(circle at ${sx}% 50%,rgba(5,8,20,0.9) 0%,rgba(5,8,20,0.7) 35%,transparent 55%)`;
-                        }
-                    }
-                }
-            }
-
-            // Stars
-            if(starsEl)starsEl.style.opacity=th.st;
-
-            // Clouds - realistic tint per time of day
-            if(th.nm==='night'){
-                _cloudTint=[55+df*15,65+df*15,100+df*20];
-            }else if(th.ry>0.4){
-                _cloudTint=[255, 195+th.ry*35, 145+th.ry*40];
-            }else{
-                _cloudTint=[255,255,255];
-            }
-            _cloudOp=Math.min(0.95,th.co*1.15);
-            if(cloudEl){
-                cloudEl.style.opacity=Math.min(1,th.co*1.2);
-                cloudEl.style.transition='opacity 2s ease';
-            }
-
-            // Particles mode switch
-            if(_pMode!==th.pm){_pMode=th.pm;initParts();}
-            _pTint=th.pt;
-
-            // Gold tint adjustment
-            document.documentElement.style.setProperty('--gold',df>0.4?'#d4b06a':'#c9a961');
-            document.documentElement.style.setProperty('--gold-light',df>0.4?'#f0dfb5':'#e8d5a3');
-        }
-
-        // === INITIALIZATION ===
-        function initSky(){
-            initClouds();initStars();initParts();drawRays();
-            animateClouds();drawStars();animateParts();
-            applyTheme(); // apply instantly
-            // Enable smooth transitions after initial state is set
-            setTimeout(()=>{
-                const sunEl=document.getElementById('celestial-sun');
-                const moonEl=document.getElementById('celestial-moon');
-                const sunAmb=document.getElementById('sun-ambient');
-                const tD=USE_REAL_TIME?'60s':'2s';
-                const pD=USE_REAL_TIME?'180s':'3s';
-                if(sunEl)sunEl.style.transition=`opacity ${tD} ease, left ${pD} linear, top ${pD} linear`;
-                if(moonEl)moonEl.style.transition=`opacity ${tD} ease, left ${pD} linear, top ${pD} linear`;
-                if(sunAmb)sunAmb.style.transition=`opacity ${tD} ease`;
-            },100);
-            setInterval(()=>{applyTheme();updateTimeDisplay();}, USE_REAL_TIME?5000:80);
-            updateTimeDisplay();
-        }
-
-        // Run after DOM ready
-        if(document.readyState==='loading'){
-            document.addEventListener('DOMContentLoaded',initSky);
-        }else{
-            initSky();
-        }
-
-        function updateTimeDisplay(){
-            const th=getTimeTheme();
-            const label=document.getElementById('time-label');
-            const val=document.getElementById('time-value');
-            const ind=document.getElementById('time-indicator');
-            if(label&&val){
-                const h=Math.floor(th.hour)%24;
-                const m=Math.floor((th.hour%1)*60);
-                let period;
-                if(h>=5&&h<11)period='清晨';
-                else if(h>=11&&h<13)period='正午';
-                else if(h>=13&&h<17)period='下午';
-                else if(h>=17&&h<19)period='日落';
-                else if(h>=19&&h<21)period='傍晚';
-                else period='夜晚';
-                const h12=h%12||12;
-                label.textContent=period;
-                val.textContent=h12+':'+(m<10?'0':'')+m;
-            }
-            if(ind){
-                if(th.nm==='night'){
-                    ind.style.background='rgba(10,15,40,0.5)';
-                    ind.style.color='rgba(180,200,255,0.8)';
-                }else if(th.ry>0.3){
-                    ind.style.background='rgba(80,30,10,0.35)';
-                    ind.style.color='rgba(255,220,180,0.9)';
-                }else{
-                    ind.style.background='rgba(255,255,255,0.15)';
-                    ind.style.color='rgba(255,255,255,0.85)';
-                }
-            }
-        }
-
-        // Handle resize
-        let resizeTimer;
-        window.addEventListener('resize',()=>{
-            clearTimeout(resizeTimer);
-            resizeTimer=setTimeout(()=>{initClouds();initStars();initParts();},250);
-        });
-
-        // Smooth transition styles
-        const tS=document.createElement('style');
-        tS.textContent=`
-            .sky-gradient{transition:background 180s ease!important;}
-            .hero-grid{transition:opacity 90s ease!important;}
-            #celestial-sun,#celestial-moon{transition:opacity 60s ease;}
-            #star-layer{transition:opacity 120s ease;}
-            #cloud-canvas{transition:opacity 4s ease;}
-            #rays-canvas{transition:opacity 5s ease;}
-        `;
-        document.head.appendChild(tS);
+        
+        // Smooth transition
+        const tStyle = document.createElement('style');
+        tStyle.textContent = `.hero { transition: background-color 90s linear; }
+                              .hero::before { transition: all 90s linear; }
+                              .hero-grid, .hero-scanlines { transition: opacity 120s linear; }
+                              #celestial-sun, #celestial-moon { transition: opacity 30s ease; }
+                              #star-layer { transition: opacity 60s ease; }`;
+        document.head.appendChild(tStyle);
+        
+        applyTimeTheme();
+        setInterval(applyTimeTheme, 30000); // update every 30s for smooth drift
         
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (!navbar) return;
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
-                try {
-                    const theme = getTimeTheme();
-                    const bd = theme.nm === 'day' ? 'rgba(255,255,255,0.15)'
-                             : theme.nm === 'trans' ? rgba(theme.atmo||theme.at, 0.15)
-                             : 'rgba(201,169,97,0.1)';
-                    navbar.style.borderBottom = `1px solid ${bd}`;
-                } catch(e) {
-                    navbar.style.borderBottom = '1px solid rgba(201,169,97,0.1)';
-                }
+                const theme = getTimeTheme();
+                navbar.style.borderBottom = `1px solid ${rgba(theme.accent, 0.2)}`;
             } else {
                 navbar.classList.remove('scrolled');
                 navbar.style.borderBottom = 'none';
