@@ -1684,9 +1684,13 @@
                 stroke-width: 2;
             }
             
-            .hero { padding: 100px 25px 0; min-height: 100svh; }
-            .hero h1 { font-size: 2.2rem; letter-spacing: 4px; }
-            .hero .subtitle { font-size: 1.1rem; letter-spacing: 3px; }
+            .hero { padding: 60px 25px 0; min-height: 100vh; align-items: flex-start; }
+            .hero-logo { width: 72px; margin-bottom: 6px; }
+            .hero h1 { font-size: 1.55rem; letter-spacing: 2px; margin-bottom: 3px; }
+            .hero .subtitle { font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 3px; }
+            .hero .tagline { font-size: 0.7rem; margin-bottom: 8px; line-height: 1.45; max-width: 260px; }
+            .btn-gold { padding: 8px 20px; font-size: 0.78rem; margin-bottom: 0; }
+            .scroll-indicator { display: none; }
             
             section, .timeline, .features { padding: 60px 25px; scroll-margin-top: 70px; }
             .section-header h2 { font-size: 1.8rem; }
@@ -2359,26 +2363,13 @@
         ];
 
         function getTimeTheme(){
-            const now=new Date();
-            const hour=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
-            for(let i=0;i<TK.length-1;i++){
-                const a=TK[i],b=TK[i+1];
-                if(hour>=a.h&&hour<=b.h){
-                    const t=smooth((hour-a.h)/(b.h-a.h));
-                    return {
-                        sT:lerpArr(a.sT,b.sT,t), sM:lerpArr(a.sM,b.sM,t), sB:lerpArr(a.sB,b.sB,t),
-                        at:lerpArr(a.at,b.at,t), hz:lerpArr(a.hz,b.hz,t),
-                        sn:lerp(a.sn,b.sn,t), mn:lerp(a.mn,b.mn,t), st:lerp(a.st,b.st,t),
-                        co:lerp(a.co,b.co,t), ct:lerpArr(a.ct,b.ct,t),
-                        gr:lerp(a.gr,b.gr,t), ry:lerp(a.ry,b.ry,t),
-                        pm:t<0.5?a.pm:b.pm, pt:lerpArr(a.pt,b.pt,t),
-                        nm:t<0.5?a.nm:b.nm,
-                        sp:hour/24, hour, mp:getMoonPhase()
-                    };
-                }
-            }
-            return {sT:[55,125,210],sM:[105,165,230],sB:[165,195,235],at:[125,175,245],hz:[180,205,240],
-                    sn:1,mn:0,st:0,co:0.6,ct:[255,255,255],gr:0,ry:0.08,pm:'day',pt:[255,245,210],nm:'day',sp:0.5,hour:12,mp:0.5};
+            // Always bright daytime for a fresh, inviting food brand look
+            return {
+                sT:[55,135,225],sM:[110,175,235],sB:[175,210,245],
+                at:[130,185,252],hz:[200,225,252],
+                sn:1,mn:0,st:0,co:0.88,ct:[255,255,255],gr:0,ry:0.25,
+                pm:'day',pt:[255,245,210],nm:'day',sp:0.4,hour:10,mp:0.5
+            };
         }
 
         // === CLOUD SYSTEM (puffy realistic clouds) ===
