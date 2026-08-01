@@ -502,7 +502,7 @@
             z-index: 0;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 120s ease;
+            transition: opacity 3s ease;
         }
 
         /* Horizon glow (sunrise/sunset) */
@@ -513,7 +513,7 @@
             z-index: 1;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 60s ease;
+            transition: opacity 3s ease;
         }
 
         /* === CLOUDS === */
@@ -523,8 +523,8 @@
             width: 100%; height: 65%;
             z-index: 2;
             pointer-events: none;
-            opacity: 0.5;
-            transition: opacity 30s ease;
+            opacity: 0.8;
+            transition: opacity 2s ease;
         }
 
         /* === STARS === */
@@ -535,7 +535,7 @@
             z-index: 1;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 120s ease;
+            transition: opacity 3s ease;
         }
 
         /* === SUN === */
@@ -543,7 +543,7 @@
             position: absolute;
             z-index: 3;
             pointer-events: none;
-            width: 200px; height: 200px;
+            width: 240px; height: 240px;
             border-radius: 50%;
             opacity: 0;
             transform: translate(-50%, -50%);
@@ -552,9 +552,9 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 70px; height: 70px;
+            width: 80px; height: 80px;
             border-radius: 50%;
-            transition: background 30s ease, box-shadow 30s ease;
+            transition: background 2s ease, box-shadow 2s ease;
         }
         .sun-corona {
             position: absolute;
@@ -565,7 +565,7 @@
             border: 1.5px solid rgba(255,210,120,0.5);
             animation: coronaSpin 40s linear infinite;
             pointer-events: none;
-            transition: border-color 30s ease;
+            transition: border-color 2s ease;
         }
         .sun-corona::before {
             content: '';
@@ -580,7 +580,7 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 200px; height: 200px;
+            width: 240px; height: 240px;
             border-radius: 50%;
             border: 1px dashed rgba(255,190,100,0.25);
             animation: coronaSpin 60s linear infinite reverse;
@@ -593,7 +593,7 @@
             width: 280px; height: 280px;
             border-radius: 50%;
             animation: sunGlowPulse 4s ease-in-out infinite;
-            transition: background 30s ease;
+            transition: background 3s ease;
         }
         @keyframes coronaSpin {
             from { transform: translate(-50%,-50%) rotate(0deg); }
@@ -631,7 +631,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             border-radius: 50%;
-            transition: background 600s linear;
+            transition: background 60s linear;
             pointer-events: none;
         }
 
@@ -647,7 +647,7 @@
             position: absolute;
             bottom: 0; left: 0;
             width: 100%; height: 100%;
-            transition: fill 120s ease;
+            transition: fill 3s ease;
         }
         .mountain-far { opacity: 0.5; transition: opacity 5s ease; }
         .mountain-far path { fill: #5a7a9a; }
@@ -674,7 +674,7 @@
             z-index: 2;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 30s ease;
+            transition: opacity 2s ease;
             mix-blend-mode: screen;
         }
 
@@ -689,7 +689,7 @@
                 linear-gradient(rgba(201,169,97,0.025) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(201,169,97,0.025) 1px, transparent 1px);
             background-size: 100px 100px;
-            transition: opacity 60s ease;
+            transition: opacity 3s ease;
         }
 
         /* === Bottom fade to next section === */
@@ -708,7 +708,7 @@
             z-index: 4;
             pointer-events: none;
             background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.25) 100%);
-            transition: opacity 30s ease;
+            transition: opacity 2s ease;
         }
 
         /* === Orbital rings around logo === */
@@ -1370,7 +1370,7 @@
         }
         
         .feature-icon {
-            width: 70px; height: 70px;
+            width: 80px; height: 80px;
             margin: 0 auto 25px;
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             border-radius: 50%;
@@ -1685,12 +1685,16 @@
             }
             
             .hero { padding: 60px 25px 0; min-height: 100vh; align-items: flex-start; }
-            .hero-logo { width: 72px; margin-bottom: 6px; }
-            .hero h1 { font-size: 1.55rem; letter-spacing: 2px; margin-bottom: 3px; }
-            .hero .subtitle { font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 3px; }
-            .hero .tagline { font-size: 0.7rem; margin-bottom: 8px; line-height: 1.45; max-width: 260px; }
-            .btn-gold { padding: 8px 20px; font-size: 0.78rem; margin-bottom: 0; }
+            .hero-logo { width: 68px; margin-bottom: 5px; }
+            .hero h1 { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 2px; }
+            .hero .subtitle { font-size: 0.78rem; letter-spacing: 2px; margin-bottom: 2px; }
+            .hero .tagline { font-size: 0.68rem; margin-bottom: 8px; line-height: 1.4; max-width: 260px; }
+            .btn-gold { padding: 8px 18px; font-size: 0.75rem; margin-bottom: 0; }
             .scroll-indicator { display: none; }
+            #time-indicator { bottom: 12px; right: 12px; padding: 4px 10px; font-size: 0.58rem; }
+            .celestial-sun { width: 140px !important; height: 140px !important; }
+            .sun-core { width: 55px !important; height: 55px !important; }
+            .sun-glow { width: 180px !important; height: 180px !important; }
             
             section, .timeline, .features { padding: 60px 25px; scroll-margin-top: 70px; }
             .section-header h2 { font-size: 1.8rem; }
@@ -1819,6 +1823,11 @@
 
         <!-- Bottom fade to content -->
         <div class="hero-bottom-fade" id="hero-bottom-fade"></div>
+
+        <!-- Time indicator -->
+        <div id="time-indicator" style="position:absolute;bottom:20px;right:20px;z-index:30;padding:6px 14px;border-radius:20px;background:rgba(0,0,0,0.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:rgba(255,255,255,0.7);font-size:0.7rem;font-family:system-ui,-apple-system,sans-serif;letter-spacing:1px;pointer-events:none;transition:all 0.5s ease;">
+            <span id="time-label">上午</span> <span id="time-value">--:--</span>
+        </div>
 
         <!-- Orbital rings -->
         <div class="hero-orbital"></div>
@@ -2362,14 +2371,50 @@
             {h:24,  sT:[4,3,15],    sM:[10,8,35],    sB:[18,14,50],   at:[30,25,75],  hz:[0,0,0],     sn:0,   mn:0.9, st:1.0, co:0.15, ct:[35,45,90],   gr:0.3, ry:0,   pm:'night',pt:[70,90,180],   nm:'night'},
         ];
 
+        // === TIME SYSTEM ===
+        // Demo mode: full day/night cycle in 120 seconds so changes are visible
+        // Set USE_REAL_TIME = true to use actual system time instead
+        const USE_REAL_TIME = false;
+        const DEMO_CYCLE_SECONDS = 120;
+        let _demoStart = Date.now();
+
         function getTimeTheme(){
-            // Always bright daytime for a fresh, inviting food brand look
-            return {
-                sT:[55,135,225],sM:[110,175,235],sB:[175,210,245],
-                at:[130,185,252],hz:[200,225,252],
-                sn:1,mn:0,st:0,co:0.88,ct:[255,255,255],gr:0,ry:0.25,
-                pm:'day',pt:[255,245,210],nm:'day',sp:0.4,hour:10,mp:0.5
-            };
+            let hour;
+            if(USE_REAL_TIME){
+                const now=new Date();
+                hour=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+            }else{
+                const elapsed=(Date.now()-_demoStart)/1000;
+                const cyclePos=(elapsed%DEMO_CYCLE_SECONDS)/DEMO_CYCLE_SECONDS;
+                hour=6+cyclePos*24; // start at sunrise (6am)
+                if(hour>=24)hour-=24;
+            }
+            for(let i=0;i<TK.length-1;i++){
+                const a=TK[i],b=TK[i+1];
+                if(hour>=a.h&&hour<=b.h){
+                    const t=smooth((hour-a.h)/(b.h-a.h));
+                    return {
+                        sT:lerpArr(a.sT,b.sT,t), sM:lerpArr(a.sM,b.sM,t), sB:lerpArr(a.sB,b.sB,t),
+                        at:lerpArr(a.at,b.at,t), hz:lerpArr(a.hz,b.hz,t),
+                        sn:lerp(a.sn,b.sn,t), mn:lerp(a.mn,b.mn,t), st:lerp(a.st,b.st,t),
+                        co:lerp(a.co,b.co,t), ct:lerpArr(a.ct,b.ct,t),
+                        gr:lerp(a.gr,b.gr,t), ry:lerp(a.ry,b.ry,t),
+                        pm:t<0.5?a.pm:b.pm, pt:lerpArr(a.pt,b.pt,t),
+                        nm:t<0.5?a.nm:b.nm,
+                        sp:hour/24, hour, mp:getMoonPhase()
+                    };
+                }
+            }
+            return {sT:[55,125,210],sM:[105,165,230],sB:[165,195,235],at:[125,175,245],hz:[180,205,240],
+                    sn:1,mn:0,st:0,co:0.6,ct:[255,255,255],gr:0,ry:0.08,pm:'day',pt:[255,245,210],nm:'day',sp:0.5,hour:12,mp:0.5};
+        }
+
+        function formatHour(h){
+            const hh=Math.floor(h)%24;
+            const mm=Math.floor((h%1)*60);
+            const period=hh>=12?'下午':'上午';
+            const h12=hh%12||12;
+            return period+' '+h12+':'+(mm<10?'0':'')+mm;
         }
 
         // === CLOUD SYSTEM (puffy realistic clouds) ===
@@ -2388,7 +2433,7 @@
             cloudCtx.scale(dpr,dpr);
             clouds=[];
             const isMob=window.innerWidth<768;
-            const cnt=isMob?10:22;
+            const cnt=isMob?14:28;
             for(let i=0;i<cnt;i++){
                 const layer=Math.random()<0.4?0:1;
                 const baseSpeed=layer===0?0.05:0.12;
@@ -2411,9 +2456,9 @@
             const puffs=[];
             for(let i=0;i<count;i++){
                 puffs.push({
-                    ox:(Math.random()-0.5)*0.8,
-                    oy:(Math.random()-0.5)*0.4,
-                    r:0.5+Math.random()*0.6
+                    ox:(Math.random()-0.5)*0.85,
+                    oy:(Math.random()-0.5)*0.45,
+                    r:0.4+Math.random()*0.7
                 });
             }
             return puffs;
@@ -2423,65 +2468,73 @@
             const r=Math.round(tint[0]),g=Math.round(tint[1]),b=Math.round(tint[2]);
             ctx.save();
             const sunFromLeft=_sunX<0.5;
-            const numP=9;
+            const numP=11;
             const puffArr=[];
-            // Main horizontal puffs
             for(let i=0;i<numP;i++){
                 const t=i/(numP-1);
+                const puffR=h*(0.28+Math.sin(i*1.9+i*0.3+x*0.008)*0.18);
                 puffArr.push({
-                    px: w*(0.08+t*0.84)+Math.sin(i*2.1+x*0.01)*w*0.07,
-                    py: h*(0.38+Math.cos(i*1.3)*0.18),
-                    pr: h*(0.3+Math.sin(i*1.7+x*0.005)*0.2),
-                    isEdge: i===0||i===numP-1, isTop:false
+                    px: w*(0.04+t*0.92)+Math.sin(i*2.3+x*0.012)*w*0.06,
+                    py: h*(0.42+Math.cos(i*1.5)*0.15),
+                    pr: puffR, isEdge:i===0||i===numP-1, isTop:false
                 });
             }
-            // Extra top puffs for cumulus height
-            for(let i=0;i<5;i++){
+            for(let i=0;i<7;i++){
+                const topR=h*(0.15+Math.sin(i*2.7+i*0.7)*0.1);
                 puffArr.push({
-                    px: w*(0.15+i*0.17)+Math.sin(i*3.1)*w*0.09,
-                    py: h*(0.12+Math.cos(i*2.2)*0.08),
-                    pr: h*(0.18+Math.sin(i*2.5)*0.12),
-                    isEdge:false, isTop:true
+                    px: w*(0.1+i*0.13)+Math.cos(i*2.5)*w*0.07,
+                    py: h*(0.08+Math.sin(i*1.8)*0.07)-topR*0.3,
+                    pr: topR, isEdge:false, isTop:true
                 });
             }
-            // Sort: bottom puffs first (back to front)
+            for(let i=0;i<3;i++){
+                puffArr.push({
+                    px: w*(0.25+i*0.25)+(Math.random()-0.5)*w*0.1,
+                    py: h*(0.25+Math.random()*0.12),
+                    pr: h*(0.1+Math.random()*0.08),
+                    isEdge:false, isTop:false
+                });
+            }
             puffArr.sort((a,b)=>b.py-a.py);
-            // 1. Broad shadow underneath
-            ctx.fillStyle=`rgba(${Math.round(r*0.55)},${Math.round(g*0.6)},${Math.round(b*0.72)},${opacity*0.3})`;
+            // Dark flat base
+            ctx.fillStyle=`rgba(${Math.round(r*0.42)},${Math.round(g*0.48)},${Math.round(b*0.62)},${opacity*0.45})`;
             ctx.beginPath();
-            ctx.ellipse(x+w*0.5,y+h*0.72,w*0.5,h*0.25,0,0,Math.PI*2);
+            ctx.ellipse(x+w*0.5,y+h*0.8,w*0.52,h*0.16,0,0,Math.PI*2);
             ctx.fill();
-            // 2. Individual puff shadows
+            // Shadows
             for(const p of puffArr){
-                ctx.fillStyle=`rgba(${Math.round(r*0.6)},${Math.round(g*0.65)},${Math.round(b*0.78)},${opacity*0.18})`;
+                ctx.fillStyle=`rgba(${Math.round(r*0.48)},${Math.round(g*0.52)},${Math.round(b*0.68)},${opacity*0.25})`;
                 ctx.beginPath();
-                ctx.ellipse(x+p.px,y+p.py+p.pr*0.35,p.pr,p.pr*0.5,0,0,Math.PI*2);
+                ctx.ellipse(x+p.px+p.pr*0.08,y+p.py+p.pr*0.38,p.pr*1.05,p.pr*0.42,0,0,Math.PI*2);
                 ctx.fill();
             }
-            // 3. Main body
+            // Main body
             for(const p of puffArr){
-                const br=p.isTop?12:5;
-                ctx.fillStyle=`rgba(${Math.min(255,r+br)},${Math.min(255,g+br)},${Math.min(255,b+br/2)},${Math.min(0.95,opacity*0.9)})`;
+                const br=p.isTop?20:10;
+                ctx.fillStyle=`rgba(${Math.min(255,r+br)},${Math.min(255,g+br*0.85)},${Math.min(255,b+br*0.3)},${Math.min(0.95,opacity*0.93)})`;
                 ctx.beginPath();
-                ctx.ellipse(x+p.px,y+p.py,p.pr*1.2,p.pr,0,0,Math.PI*2);
+                ctx.ellipse(x+p.px,y+p.py,p.pr*1.12,p.pr*0.92,0,0,Math.PI*2);
                 ctx.fill();
             }
-            // 4. Sun-facing highlights (bright white tops)
-            ctx.fillStyle=`rgba(255,255,255,${opacity*0.5})`;
+            // Rim light (sun-facing edge)
             for(const p of puffArr){
-                if(p.py<h*0.5){
-                    const hlx=x+p.px+(sunFromLeft?-p.pr*0.12:p.pr*0.12);
-                    const hly=y+p.py-p.pr*0.25;
+                if(p.py<h*0.6){
+                    const hlOff=sunFromLeft?-p.pr*0.18:p.pr*0.18;
+                    ctx.fillStyle=`rgba(255,255,255,${opacity*0.35})`;
                     ctx.beginPath();
-                    ctx.ellipse(hlx,hly,p.pr*0.5,p.pr*0.38,-0.15,0,Math.PI*2);
+                    ctx.ellipse(x+p.px+hlOff,y+p.py-p.pr*0.25,p.pr*0.4,p.pr*0.3,-0.1,0,Math.PI*2);
                     ctx.fill();
                 }
             }
-            // 5. Bright core
-            ctx.fillStyle=`rgba(255,255,255,${opacity*0.35})`;
-            ctx.beginPath();
-            ctx.ellipse(x+w*0.48,y+h*0.22,w*0.12,h*0.1,0,0,Math.PI*2);
-            ctx.fill();
+            // Bright highlights on tops
+            ctx.fillStyle=`rgba(255,255,255,${opacity*0.45})`;
+            for(const p of puffArr){
+                if(p.isTop){
+                    ctx.beginPath();
+                    ctx.ellipse(x+p.px+(sunFromLeft?p.pr*0.05:-p.pr*0.05),y+p.py-p.pr*0.12,p.pr*0.28,p.pr*0.18,0,0,Math.PI*2);
+                    ctx.fill();
+                }
+            }
             ctx.restore();
         }
 
@@ -2765,17 +2818,25 @@
                     ${rgb(fadeCol)} 100%)`;
             }
 
-            // Mountains color
+            // Mountains color - realistic atmospheric perspective
             const mtnFar=document.getElementById('mtn-far-path');
             const mtnMid=document.getElementById('mtn-mid-path');
             const mtnNear=document.getElementById('mtn-near-path');
-            // Mountain colors - 3 DISTINCT layers with clear separation
-            // Far mountains: hazy blue-purple (atmospheric perspective)
-            const mtnFarC=[95+df*30, 105+df*25, 140+df*30];
-            // Mid mountains: medium slate blue
-            const mtnMidC=[50+df*18, 65+df*15, 95+df*18];
-            // Near mountains: very dark navy/charcoal for strong silhouette
-            const mtnNearC=[18+df*10, 28+df*8, 48+df*10];
+            const warmT=th.ry; // 0-1, peaks at sunrise/sunset
+            let mtnFarC, mtnMidC, mtnNearC;
+            if(th.nm==='night'){
+                mtnFarC=[18+df*6, 22+df*8, 50+df*12];
+                mtnMidC=[10+df*4, 14+df*6, 32+df*10];
+                mtnNearC=[4+df*2, 6+df*4, 15+df*6];
+            }else if(warmT>0.3){
+                mtnFarC=[110+warmT*80, 85+warmT*25, 95+df*15];
+                mtnMidC=[65+warmT*45, 45+warmT*15, 58+df*10];
+                mtnNearC=[30+warmT*22, 18+warmT*6, 25+df*5];
+            }else{
+                mtnFarC=[115+df*25, 135+df*25, 165+df*20];
+                mtnMidC=[58+df*18, 75+df*18, 88+df*15];
+                mtnNearC=[20+df*10, 30+df*10, 35+df*8];
+            }
             if(mtnFar)mtnFar.setAttribute('fill',rgb(mtnFarC));
             if(mtnMid)mtnMid.setAttribute('fill',rgb(mtnMidC));
             if(mtnNear)mtnNear.setAttribute('fill',rgb(mtnNearC));
@@ -2870,11 +2931,18 @@
             // Stars
             if(starsEl)starsEl.style.opacity=th.st;
 
-            // Clouds
-            _cloudTint=th.ct;_cloudOp=th.co;
+            // Clouds - realistic tint per time of day
+            if(th.nm==='night'){
+                _cloudTint=[55+df*15,65+df*15,100+df*20];
+            }else if(th.ry>0.4){
+                _cloudTint=[255, 195+th.ry*35, 145+th.ry*40];
+            }else{
+                _cloudTint=[255,255,255];
+            }
+            _cloudOp=Math.min(0.95,th.co*1.15);
             if(cloudEl){
-                cloudEl.style.opacity=th.co;
-                cloudEl.style.transition='opacity 4s ease';
+                cloudEl.style.opacity=Math.min(1,th.co*1.2);
+                cloudEl.style.transition='opacity 2s ease';
             }
 
             // Particles mode switch
@@ -2896,11 +2964,14 @@
                 const sunEl=document.getElementById('celestial-sun');
                 const moonEl=document.getElementById('celestial-moon');
                 const sunAmb=document.getElementById('sun-ambient');
-                if(sunEl)sunEl.style.transition='opacity 60s ease, left 180s linear, top 180s linear';
-                if(moonEl)moonEl.style.transition='opacity 60s ease, left 180s linear, top 180s linear';
-                if(sunAmb)sunAmb.style.transition='opacity 60s ease';
+                const tD=USE_REAL_TIME?'60s':'2s';
+                const pD=USE_REAL_TIME?'180s':'3s';
+                if(sunEl)sunEl.style.transition=`opacity ${tD} ease, left ${pD} linear, top ${pD} linear`;
+                if(moonEl)moonEl.style.transition=`opacity ${tD} ease, left ${pD} linear, top ${pD} linear`;
+                if(sunAmb)sunAmb.style.transition=`opacity ${tD} ease`;
             },100);
-            setInterval(applyTheme,10000);
+            setInterval(()=>{applyTheme();updateTimeDisplay();}, USE_REAL_TIME?5000:80);
+            updateTimeDisplay();
         }
 
         // Run after DOM ready
@@ -2908,6 +2979,39 @@
             document.addEventListener('DOMContentLoaded',initSky);
         }else{
             initSky();
+        }
+
+        function updateTimeDisplay(){
+            const th=getTimeTheme();
+            const label=document.getElementById('time-label');
+            const val=document.getElementById('time-value');
+            const ind=document.getElementById('time-indicator');
+            if(label&&val){
+                const h=Math.floor(th.hour)%24;
+                const m=Math.floor((th.hour%1)*60);
+                let period;
+                if(h>=5&&h<11)period='清晨';
+                else if(h>=11&&h<13)period='正午';
+                else if(h>=13&&h<17)period='下午';
+                else if(h>=17&&h<19)period='日落';
+                else if(h>=19&&h<21)period='傍晚';
+                else period='夜晚';
+                const h12=h%12||12;
+                label.textContent=period;
+                val.textContent=h12+':'+(m<10?'0':'')+m;
+            }
+            if(ind){
+                if(th.nm==='night'){
+                    ind.style.background='rgba(10,15,40,0.5)';
+                    ind.style.color='rgba(180,200,255,0.8)';
+                }else if(th.ry>0.3){
+                    ind.style.background='rgba(80,30,10,0.35)';
+                    ind.style.color='rgba(255,220,180,0.9)';
+                }else{
+                    ind.style.background='rgba(255,255,255,0.15)';
+                    ind.style.color='rgba(255,255,255,0.85)';
+                }
+            }
         }
 
         // Handle resize
