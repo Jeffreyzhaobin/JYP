@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -226,11 +226,21 @@
             <li><a href="index.html" class="active">健康科普</a></li>
             <li><a href="../index.html#faq">常见问题</a></li>
             <li><a href="../index.html#contact">联系我们</a></li>
-        </ul>
+        <li><a href="article-020.html">不吃药降血脂的 4 个科学方法</a></li><li><a href="article-021.html">深夜不睡,血脂在悄悄涨</a></li><li><a href="article-022.html">久坐对心血管的伤害(以及 3 个补救)</a></li><li><a href="article-023.html">血脂高和脂肪肝有关系吗</a></li></ul>
         <button class="nav-mobile" onclick="toggleMobileNav()">
             <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
     </nav>
+
+    <!-- Mobile Nav Menu -->
+    <div id="mobile-nav" style="display:none;position:fixed;top:80px;left:0;right:0;z-index:999;background:rgba(10,22,40,0.95);backdrop-filter:blur(20px);padding:20px;text-align:center;">
+        <a href="../index.html#about" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">关于我们</a>
+        <a href="../index.html#brands" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">品牌矩阵</a>
+        <a href="../index.html#products" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">产品中心</a>
+        <a href="index.html" style="display:block;color:#c9a961;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">健康科普</a>
+        <a href="../index.html#faq" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">常见问题</a>
+        <a href="../index.html#contact" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">联系我们</a>
+    </div>
 
     <!-- Hero -->
     <section class="blog-hero">
@@ -250,6 +260,18 @@
 
     <!-- Article List -->
     <div class="article-list" id="articleList">
+        <a class="article-card" href="article-019.html" data-category="血脂健康">
+            <div class="article-thumb">🩸</div>
+            <div>
+                <div class="article-meta">
+                    <span class="article-cat">血脂健康</span>
+                    <span class="article-date">2026-08-10</span>
+                </div>
+                <h3>体检甘油三酯偏高没症状，到底要不要管？</h3>
+                <p>体检发现甘油三酯偏高但身体没感觉？饭后犯困、下午断档、肚子变大，这些都可能是信号。了解什么程度该管，怎么管。</p>
+                <span class="article-readmore">阅读全文 →</span>
+            </div>
+        </a>
         <a class="article-card" href="article-018.html" data-category="益生菌">
             <div class="article-thumb">🦠</div>
             <div>
@@ -259,6 +281,30 @@
                 </div>
                 <h3>血脂降不下来？可能问题不在肝脏，而在肠道</h3>
                 <p>肠道菌群通过胆汁酸代谢、短链脂肪酸、炎症通路和能量吸收四条路径参与血脂调节。膳食纤维摄入不足可能导致有益菌减少，影响血脂管理。</p>
+                <span class="article-readmore">阅读全文 →</span>
+            </div>
+        </a>
+        <a class="article-card" href="article-013.html" data-category="血脂健康">
+            <div class="article-thumb">🫃</div>
+            <div>
+                <div class="article-meta">
+                    <span class="article-cat">血脂健康</span>
+                    <span class="article-date">2026-07-31</span>
+                </div>
+                <h2>肚子大的人血脂一定高吗？不一定，但确实该查查</h2>
+                <p>肚子大就是血脂高？不一定。但腹部肥胖确实与血脂异常关系密切。本文解析腹型肥胖与血脂的关联，告诉你什么时候该去查血脂。</p>
+                <span class="article-readmore">阅读全文 →</span>
+            </div>
+        </a>
+        <a class="article-card" href="article-014.html" data-category="血脂健康">
+            <div class="article-thumb">🧈</div>
+            <div>
+                <div class="article-meta">
+                    <span class="article-cat">血脂健康</span>
+                    <span class="article-date">2026-08-01</span>
+                </div>
+                <h2>配料表上那行"植脂末"，可能正在悄悄抬高你的坏胆固醇</h2>
+                <p>反式脂肪藏在奶茶、蛋黄派、酥皮点心里。它"双向捣乱"——推高坏胆固醇，压低好胆固醇。本文教你读懂配料表，避开隐藏的反式脂肪。</p>
                 <span class="article-readmore">阅读全文 →</span>
             </div>
         </a>
@@ -431,21 +477,8 @@
     <script>
         // Mobile nav toggle
         function toggleMobileNav() {
-            const links = document.querySelector('.nav-links');
-            if (links.style.display === 'flex') {
-                links.style.display = 'none';
-            } else {
-                links.style.display = 'flex';
-                links.style.flexDirection = 'column';
-                links.style.position = 'absolute';
-                links.style.top = '80px';
-                links.style.left = '0';
-                links.style.right = '0';
-                links.style.background = 'rgba(10,22,40,0.98)';
-                links.style.padding = '20px';
-                links.style.gap = '20px';
-                links.style.borderBottom = '1px solid rgba(201,169,97,0.1)';
-            }
+            const nav = document.getElementById('mobile-nav');
+            nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
         }
 
         // Category filter (simple client-side filter)
