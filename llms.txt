@@ -10,6 +10,7 @@
 
 - [首页](https://jyp.hi.cn/): 站点入口
 - [文章列表](https://jyp.hi.cn/blog/): 全部科普文章
+- [血脂管理全指南](https://jyp.hi.cn/blog/lipid-guide.html): 血脂主题枢纽页（Pillar，聚合全部科普）
 - [站点地图](https://jyp.hi.cn/sitemap.xml): 完整页面清单
 
 ## Key topics
