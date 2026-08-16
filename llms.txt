@@ -12,6 +12,7 @@
 - [文章列表](https://jyp.hi.cn/blog/): 全部科普文章
 - [血脂管理全指南](https://jyp.hi.cn/blog/lipid-guide.html): 血脂主题枢纽页（Pillar，聚合全部科普）
 - [站点地图](https://jyp.hi.cn/sitemap.xml): 完整页面清单
+- [益养宣品牌与产品](https://jyp.hi.cn/about/yiyangxuan.html): 品牌实体页（品牌/菌株/认证/价格）
 
 ## Key topics
 
