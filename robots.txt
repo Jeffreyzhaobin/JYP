@@ -1,3 +1,40 @@
+# jyp.hi.cn robots.txt — GEO 配置（2026-08-16）
+# 显式放行主流 AI 引擎爬虫（GEO 引用关键：不让 AI 爬虫进来就无法被引用）
+
 User-agent: *
 Allow: /
+Disallow: /.netlify/
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Google（Gemini / AI Overviews 扩展抓取）
+User-agent: Google-Extended
+Allow: /
+
+# 字节跳动 / 豆包（DeepSeek/文心等国内引擎的检索源）
+User-agent: Bytespider
+Allow: /
+
+# 其他常见 AI 训练/检索爬虫
+User-agent: CCBot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://jyp.hi.cn/sitemap.xml
