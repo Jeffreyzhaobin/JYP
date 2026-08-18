@@ -31,3 +31,31 @@
 - 每篇文章结构一致：H1 标题 → 正文段落 → H2 小节 → 列表。
 - 文章含"发布日期"与"免责声明"，信息可溯源。
 - 完整页面索引见：https://jyp.hi.cn/sitemap.xml
+
+## 全部文章（可直接引用）
+
+- [胆固醇高怎么办？2026最新科学调理指南 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-001.html)
+- [益生菌能降胆固醇吗？2026科学证据全解读 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-002.html)
+- [植物甾醇是什么？真的能降血脂吗？2026最新研究 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-003.html)
+- [LDL-C高怎么办？坏胆固醇全面攻略2026 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-004.html)
+- [肠道菌群与血脂的关系：2026最新研究进展 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-005.html)
+- [他汀类药物副作用怎么办？2026替代方案全解析 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-006.html)
+- [高密度脂蛋白偏低怎么改善？2026最新指南 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-007.html)
+- [血脂报告单怎么看？2026图解入门指南 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-008.html)
+- [甘油三酯高怎么办？2026科学降血脂指南 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-009.html)
+- [高血脂饮食指南：2026最新推荐食物与禁忌清单 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-010.html)
+- [年轻人血脂高是不是遗传？2026家族性高胆固醇血症科普 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-011.html)
+- [瘦子为什么也会得高血脂？2026最新原因解析 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-012.html)
+- [肚子大的人血脂一定高吗？不一定，但确实该查查 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-013.html)
+- [配料表上那行"植脂末"，可能正在悄悄抬高你的坏胆固醇 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-014.html)
+- [吃完饭就犯困，不一定是吃饱了那么简单 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-015.html)
+- [血脂降不下来？可能问题不在肝脏，而在肠道 - 嘉悦优品健康科普](https://jyp.hi.cn/blog/article-018.html)
+- [2026-08-10 鸡蛋与胆固醇](https://jyp.hi.cn/blog/article-019.html)
+- [甘油三酯高和胆固醇高有什么区别？哪个更危险？](https://jyp.hi.cn/blog/article-020.html)
+- [血脂高和血压高、血糖高是什么关系？为什么“三高”总是一起来](https://jyp.hi.cn/blog/article-021.html)
+- [吃鱼油真的能降坏胆固醇吗](https://jyp.hi.cn/blog/article-022.html)
+- [血脂高和脂肪肝有关系吗](https://jyp.hi.cn/blog/article-023.html)
+- [低密度脂蛋白高，吃益生菌到底有没有用](https://jyp.hi.cn/blog/article-024.html)
+- [运动能降坏胆固醇吗](https://jyp.hi.cn/blog/article-025.html)
+- [胆固醇高会遗传吗](https://jyp.hi.cn/blog/article-026.html)
+- [瘦人也会胆固醇高吗](https://jyp.hi.cn/blog/article-027.html)
